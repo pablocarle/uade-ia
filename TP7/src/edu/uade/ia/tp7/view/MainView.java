@@ -3,15 +3,11 @@ package edu.uade.ia.tp7.view;
 import java.awt.EventQueue;
 import java.awt.event.ItemEvent;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import javax.swing.JButton;
-import javax.swing.JComboBox;
-import javax.swing.JFrame;
-import javax.swing.JLabel;
-import javax.swing.JTextArea;
-import javax.swing.JTextField;
+import javax.swing.*;
 
 import edu.uade.ia.tp7.ClipsService;
 
@@ -67,7 +63,7 @@ public class MainView {
 		frmTp = new JFrame();
 		frmTp.setTitle("TP 7");
 		frmTp.setBounds(100, 100, 477, 577);
-		frmTp.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		frmTp.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
 		frmTp.getContentPane().setLayout(null);
 		
 		btnExecute = new JButton("Ejecutar");
@@ -76,11 +72,11 @@ public class MainView {
 				List result = new ArrayList<>();
 				try {
 					result = clips.run(extractParams());
+					displayResult(result);
 				} catch (Exception e) {
-					// TODO Auto-generated catch block
+					JOptionPane.showMessageDialog(null, "Error ejecutando CLIPS " + e.getMessage());
 					e.printStackTrace();
 				}
-				displayResult(result);
 			}
 		});
 		btnExecute.setBounds(25, 179, 114, 25);
@@ -135,7 +131,7 @@ public class MainView {
 		
 		comboColors = new JComboBox<>();
 		comboColors.setBounds(247, 45, 167, 24);
-		comboColors.setRenderer(new ComboRowRenderer());
+		//comboColors.setRenderer(new ComboRowRenderer());
 		frmTp.getContentPane().add(comboColors);
 		
 		comboCategory = new JComboBox<>();
@@ -171,18 +167,18 @@ public class MainView {
 			resultArea.setText("No hay coincidencias de equipos para los parametros ingresados");
 		} else {
 			resultArea.setText("Los siguientes pares equipos - camisetas cumplen con los parametros ingresados\n");
-			
 		}
 	}
 
 	private boolean validate() {
-		// TODO Auto-generated method stub
-		return false;
+		Map<String, String> params = extractParams();
+		return params.size() > 0 && params.entrySet().stream()
+				.allMatch(entry -> entry.getValue() != null && entry.getValue().length() > 0);
 	}
 
 	private Map<String, String> extractParams() {
-		
-		return null;
+
+		return new HashMap<>();
 	}
 
 	private void initializeCountries(JComboBox<String> combo) {

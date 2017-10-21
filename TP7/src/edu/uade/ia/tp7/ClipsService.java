@@ -20,8 +20,10 @@ public class ClipsService {
 		environment.reset();
 	}
 
-	public List run(Map<String, String> extractParams) throws Exception {
-		// TODO Auto-generated method stub
+	public List run(Map<String, String> params) throws Exception {
+		StringBuilder evalStr = new StringBuilder();
+
+		environment.eval("");
 		return null;
 	}
 	
