@@ -1,15 +1,11 @@
-package edu.uade.ia.tp7.view;
+package edu.uade.ia.tp7;
 
-import java.awt.EventQueue;
+import javax.swing.*;
+import java.awt.*;
 import java.awt.event.ItemEvent;
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-
-import javax.swing.*;
-
-import edu.uade.ia.tp7.ClipsService;
 
 public class MainView {
 
@@ -27,9 +23,9 @@ public class MainView {
 	private JTextArea resultArea;
 	private JComboBox<String> comboCountry;
 	private JComboBox<String> comboPattern;
-	private JComboBox<String> comboColors;
+	private JList<String> listColors;
 	private JComboBox<String> comboCategory;
-	
+
 	private ClipsService clips;
 
 	/**
@@ -69,9 +65,9 @@ public class MainView {
 		btnExecute = new JButton("Ejecutar");
 		btnExecute.addActionListener(event -> {
 			if (validate()) {
-				List result = new ArrayList<>();
+				List result;
 				try {
-					result = clips.run(extractParams());
+					result = clips.findFacts(extractParams());
 					displayResult(result);
 				} catch (Exception e) {
 					JOptionPane.showMessageDialog(null, "Error ejecutando CLIPS " + e.getMessage());
@@ -79,7 +75,7 @@ public class MainView {
 				}
 			}
 		});
-		btnExecute.setBounds(25, 179, 114, 25);
+		btnExecute.setBounds(25, 199, 114, 25);
 		frmTp.getContentPane().add(btnExecute);
 		
 		lblPais = new JLabel("Pais");
@@ -91,27 +87,38 @@ public class MainView {
 		frmTp.getContentPane().add(lblColores);
 		
 		lblCategorias = new JLabel("Categoria");
-		lblCategorias.setBounds(25, 77, 145, 15);
+		lblCategorias.setBounds(25, 97, 145, 15);
 		frmTp.getContentPane().add(lblCategorias);
 		
 		lblPatron = new JLabel("Patron");
-		lblPatron.setBounds(25, 104, 66, 15);
+		lblPatron.setBounds(25, 124, 66, 15);
 		frmTp.getContentPane().add(lblPatron);
 		
 		lblCantidadDeBarras = new JLabel("Cantidad de Barras");
-		lblCantidadDeBarras.setBounds(25, 131, 167, 15);
+		lblCantidadDeBarras.setBounds(25, 151, 167, 15);
 		frmTp.getContentPane().add(lblCantidadDeBarras);
 		
 		btnRestart = new JButton("Reinicar");
-		btnRestart.setBounds(174, 179, 114, 25);
+		btnRestart.setBounds(174, 199, 114, 25);
+		btnRestart.addActionListener(event -> {
+			try {
+				clips.reset();
+			} catch (Exception e) {
+				JOptionPane.showMessageDialog(null, "Error reiniciando ambiente CLIPS. " + e.getMessage());
+				e.printStackTrace();
+			}
+		});
 		frmTp.getContentPane().add(btnRestart);
 		
 		btnClean = new JButton("Limpiar");
-		btnClean.setBounds(300, 179, 114, 25);
+		btnClean.setBounds(300, 199, 114, 25);
+		btnClean.addActionListener(event -> {
+			clean();
+		});
 		frmTp.getContentPane().add(btnClean);
 		
 		resultArea = new JTextArea();
-		resultArea.setBounds(25, 231, 404, 284);
+		resultArea.setBounds(25, 251, 404, 284);
 		frmTp.getContentPane().add(resultArea);
 		
 		comboCountry = new JComboBox<>();
@@ -128,18 +135,20 @@ public class MainView {
 			}
 		});
 		frmTp.getContentPane().add(comboCountry);
-		
-		comboColors = new JComboBox<>();
-		comboColors.setBounds(247, 45, 167, 24);
-		//comboColors.setRenderer(new ComboRowRenderer());
-		frmTp.getContentPane().add(comboColors);
+
+		JScrollPane scrollPane = new JScrollPane();
+		listColors = new JList<>();
+		scrollPane.setBounds(247, 45, 167, 44);
+		initializeColors(listColors);
+		scrollPane.setViewportView(listColors);
+		frmTp.getContentPane().add(scrollPane);
 		
 		comboCategory = new JComboBox<>();
-		comboCategory.setBounds(247, 72, 167, 24);
+		comboCategory.setBounds(247, 92, 167, 24);
 		frmTp.getContentPane().add(comboCategory);
 		
 		comboPattern = new JComboBox<>();
-		comboPattern.setBounds(247, 99, 167, 24);
+		comboPattern.setBounds(247, 119, 167, 24);
 		initializePatterns(comboPattern);
 		comboPattern.addItemListener(event -> {
 			if (event.getStateChange() == ItemEvent.SELECTED) {
@@ -156,10 +165,28 @@ public class MainView {
 		frmTp.getContentPane().add(comboPattern);
 		
 		txtStripesAmount = new JTextField();
-		txtStripesAmount.setBounds(247, 129, 167, 19);
+		txtStripesAmount.setBounds(247, 149, 167, 19);
 		txtStripesAmount.setEnabled(false);
 		frmTp.getContentPane().add(txtStripesAmount);
 		txtStripesAmount.setColumns(10);
+	}
+
+	private void clean() {
+		resultArea.setText("");
+		comboCountry.setSelectedItem("");
+		listColors.clearSelection();
+		comboCategory.setSelectedItem("");
+		comboPattern.setSelectedItem("");
+		txtStripesAmount.setText("");
+		txtStripesAmount.setEnabled(false);
+	}
+
+	private void initializeColors(JList<String> list) {
+		list.clearSelection();
+		list.setListData(new String[]{
+				"blanco", "azul", "rojo",
+				"celeste", "amarillo", "negro"
+		});
 	}
 
 	private void displayResult(List result) {
@@ -182,12 +209,14 @@ public class MainView {
 	}
 
 	private void initializeCountries(JComboBox<String> combo) {
+		combo.removeAllItems();
 		combo.addItem("");
 		combo.addItem("Argentina");
 		combo.addItem("Italia");
 	}
 	
 	private void initializePatterns(JComboBox<String> combo) {
+		combo.removeAllItems();
 		combo.addItem("");
 		combo.addItem("Barras Horizontales");
 		combo.addItem("Barras Verticales");
@@ -199,8 +228,8 @@ public class MainView {
 		combo.removeAllItems();
 		switch (country.toLowerCase()) {
 			case "argentina":
-				combo.addItem("Primera A");
-				combo.addItem("Primera B Nacional");
+				combo.addItem("PrimeraA");
+				combo.addItem("NacionalB");
 				break;
 			case "italia":
 				combo.addItem("Serie A");

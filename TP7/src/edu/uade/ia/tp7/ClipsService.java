@@ -20,10 +20,12 @@ public class ClipsService {
 		environment.reset();
 	}
 
-	public List run(Map<String, String> params) throws Exception {
+	public List findFacts(Map<String, String> params) throws Exception {
 		StringBuilder evalStr = new StringBuilder();
 
 		environment.eval("");
+		environment.run();
+
 		return null;
 	}
 	
