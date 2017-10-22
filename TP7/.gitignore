@@ -3,3 +3,9 @@
 *.iml
 
 out/
+
+*.tar
+
+*.gz
+
+*.tar.gz
