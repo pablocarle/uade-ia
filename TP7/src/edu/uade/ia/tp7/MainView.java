@@ -67,12 +67,14 @@ public class MainView {
 			if (validate()) {
 				List result;
 				try {
-					result = clips.findFacts(extractParams());
+					result = clips.findFacts("equipo", extractParams());
 					displayResult(result);
 				} catch (Exception e) {
 					JOptionPane.showMessageDialog(null, "Error ejecutando CLIPS " + e.getMessage());
 					e.printStackTrace();
 				}
+			} else {
+				JOptionPane.showMessageDialog(null, "Revise los parametros");
 			}
 		});
 		btnExecute.setBounds(25, 199, 114, 25);
@@ -198,14 +200,41 @@ public class MainView {
 	}
 
 	private boolean validate() {
-		Map<String, String> params = extractParams();
-		return params.size() > 0 && params.entrySet().stream()
-				.allMatch(entry -> entry.getValue() != null && entry.getValue().length() > 0);
+		boolean number;
+		Map<String, Object> params = new HashMap<>();
+		try {
+			params = extractParams();
+			Integer.valueOf(txtStripesAmount.getText());
+			number = true;
+		} catch (NumberFormatException e) {
+			number = false;
+		}
+		return number && params.size() > 0;
 	}
 
-	private Map<String, String> extractParams() {
-
-		return new HashMap<>();
+	private Map<String, Object> extractParams() {
+		Map<String, Object> params = new HashMap<>();
+		String country = (String) comboCountry.getSelectedItem();
+		String category = (String) comboCategory.getSelectedItem();
+		List<String> colors = listColors.getSelectedValuesList();
+		String pattern = (String) comboPattern.getSelectedItem();
+		String stripesAmount = txtStripesAmount.getText();
+		if (country != null && country.length() > 0) {
+			params.put("pais", country);
+		}
+		if (category != null && category.length() > 0) {
+			params.put("categoria", category);
+		}
+		if (colors != null && !colors.isEmpty()) {
+			params.put("colores-camiseta", colors);
+		}
+		if (pattern != null && pattern.length() > 0) {
+			params.put("patron", pattern);
+		}
+		if (stripesAmount != null && stripesAmount.length() > 0) {
+			params.put("cantidadBarras", Integer.valueOf(stripesAmount));
+		}
+		return params;
 	}
 
 	private void initializeCountries(JComboBox<String> combo) {
@@ -213,14 +242,16 @@ public class MainView {
 		combo.addItem("");
 		combo.addItem("Argentina");
 		combo.addItem("Italia");
+		combo.addItem("Inglaterra");
+		combo.addItem("Espana");
 	}
 	
 	private void initializePatterns(JComboBox<String> combo) {
 		combo.removeAllItems();
 		combo.addItem("");
-		combo.addItem("Barras Horizontales");
-		combo.addItem("Barras Verticales");
-		combo.addItem("Barras Diagonales");
+		combo.addItem("BarrasHorizontales");
+		combo.addItem("BarrasVerticales");
+		combo.addItem("BarrasDiagonales");
 		combo.addItem("Lisa");
 	}
 	
@@ -232,8 +263,14 @@ public class MainView {
 				combo.addItem("NacionalB");
 				break;
 			case "italia":
-				combo.addItem("Serie A");
-				combo.addItem("Serie B");
+				combo.addItem("SerieA");
+				combo.addItem("SerieB");
+				break;
+			case "inglaterra":
+				combo.addItem("PremierLeague");
+				break;
+			case "espana":
+				combo.addItem("PrimeraDivision");
 				break;
 			default:
 				combo.addItem("");
