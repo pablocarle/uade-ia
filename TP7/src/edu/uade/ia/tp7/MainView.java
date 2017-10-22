@@ -195,7 +195,12 @@ public class MainView {
 		if (result.isEmpty()) {
 			resultArea.setText("No hay coincidencias de equipos para los parametros ingresados");
 		} else {
-			resultArea.setText("Los siguientes pares equipos - camisetas cumplen con los parametros ingresados\n");
+			StringBuilder text = new StringBuilder();
+			text.append("Los siguientes pares equipos - camisetas cumplen\n con los parametros ingresados\n");
+			for (Object o : result) {
+				text.append(o).append("\n");
+			}
+			resultArea.setText(text.toString());
 		}
 	}
 

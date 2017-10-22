@@ -7,6 +7,7 @@ import java.util.Map;
 import net.sf.clipsrules.jni.Environment;
 import net.sf.clipsrules.jni.FactAddressValue;
 import net.sf.clipsrules.jni.MultifieldValue;
+import net.sf.clipsrules.jni.PrimitiveValue;
 
 public class ClipsService {
 
@@ -19,8 +20,20 @@ public class ClipsService {
 	
 	private void initializeEnvironment() {
 		environment = new Environment();
-		environment.loadFromResource("tp7.clp");
+		environment.loadFromResource("/edu/uade/ia/tp7/resources/tp7.clp");
 		environment.reset();
+
+		PrimitiveValue pv1 = environment.eval("(facts)");
+
+		System.out.println("pv1: " + pv1.getValue());
+
+		long result = environment.run();
+
+		PrimitiveValue pv2 = environment.eval("(facts)");
+
+		System.out.println("pv2: " + pv2.getValue());
+
+		System.out.println("Initialization result is: " + result);
 	}
 
 	public List findFacts(String factAddress, Map<String, Object> params) throws Exception {
@@ -39,12 +52,16 @@ public class ClipsService {
 			}
 		});
 		evalStr.append("))");
-		MultifieldValue value = (MultifieldValue) environment.eval(evalStr.toString());
+		PrimitiveValue pv = environment.eval(evalStr.toString());
 
-		for (Object factAddressRaw : value.multifieldValue()) {
-			FactAddressValue factAddressValue = (FactAddressValue) factAddressRaw;
-			results.add(factAddressValue.getFactSlot("nombre").toString());
+		if (pv instanceof MultifieldValue) {
+			MultifieldValue value = (MultifieldValue) pv;
+			for (Object factAddressRaw : value.multifieldValue()) {
+				FactAddressValue factAddressValue = (FactAddressValue) factAddressRaw;
+				results.add(factAddressValue.getFactSlot("nombre").toString());
+			}
 		}
+
 		long result = environment.run();
 		System.out.println("Result is: " + result);
 		return results;

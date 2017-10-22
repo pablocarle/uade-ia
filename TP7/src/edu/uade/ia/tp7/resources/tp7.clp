@@ -57,7 +57,7 @@
 	    (cantidadBarras 3)
 	)
 	(equipo
-	    (nombre FC Barcelona)
+	    (nombre FCBarcelona)
 	    (categoria PrimeraDivision)
 	    (colores-camiseta azul rojo)
 	    (pais Espana)
