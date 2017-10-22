@@ -22,17 +22,7 @@ public class ClipsService {
 		environment = new Environment();
 		environment.loadFromResource("/edu/uade/ia/tp7/resources/tp7.clp");
 		environment.reset();
-
-		PrimitiveValue pv1 = environment.eval("(facts)");
-
-		System.out.println("pv1: " + pv1.getValue());
-
 		long result = environment.run();
-
-		PrimitiveValue pv2 = environment.eval("(facts)");
-
-		System.out.println("pv2: " + pv2.getValue());
-
 		System.out.println("Initialization result is: " + result);
 	}
 
