@@ -6,6 +6,7 @@ import java.awt.event.ItemEvent;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 public class MainView {
 
@@ -65,9 +66,9 @@ public class MainView {
 		btnExecute = new JButton("Ejecutar");
 		btnExecute.addActionListener(event -> {
 			if (validate()) {
-				List result;
+				List<Map<String, String>> result;
 				try {
-					result = clips.findFacts("equipo", extractParams());
+					result = clips.findFacts("Resultado", extractParams());
 					displayResult(result);
 				} catch (Exception e) {
 					JOptionPane.showMessageDialog(null, "Error ejecutando CLIPS " + e.getMessage());
@@ -191,14 +192,18 @@ public class MainView {
 		});
 	}
 
-	private void displayResult(List result) {
+	private void displayResult(List<Map<String, String>> result) {
 		if (result.isEmpty()) {
 			resultArea.setText("No hay coincidencias de equipos para los parametros ingresados");
 		} else {
 			StringBuilder text = new StringBuilder();
-			text.append("Los siguientes pares equipos - camisetas cumplen\n con los parametros ingresados\n");
-			for (Object o : result) {
-				text.append(o).append("\n");
+			text.append("Los siguientes pares equipos cumplen\n con los parametros ingresados\n");
+			for (Map<String, String> values : result) {
+				text.append("---------------------------------------\n");
+				values.forEach((k, v) -> {
+					text.append(k).append(": ").append(v).append("\n");
+				});
+				text.append("\n");
 			}
 			resultArea.setText(text.toString());
 		}
@@ -206,7 +211,7 @@ public class MainView {
 
 	private boolean validate() {
 		boolean number;
-		Map<String, Object> params = new HashMap<>();
+		Map<String, String> params = new HashMap<>();
 		try {
 			params = extractParams();
 			Integer.valueOf(txtStripesAmount.getText());
@@ -217,27 +222,27 @@ public class MainView {
 		return number && params.size() > 0;
 	}
 
-	private Map<String, Object> extractParams() {
-		Map<String, Object> params = new HashMap<>();
+	private Map<String, String> extractParams() {
+		Map<String, String> params = new HashMap<>();
 		String country = (String) comboCountry.getSelectedItem();
 		String category = (String) comboCategory.getSelectedItem();
 		List<String> colors = listColors.getSelectedValuesList();
 		String pattern = (String) comboPattern.getSelectedItem();
 		String stripesAmount = txtStripesAmount.getText();
 		if (country != null && country.length() > 0) {
-			params.put("pais", country);
+			params.put("paises", country);
 		}
 		if (category != null && category.length() > 0) {
-			params.put("categoria", category);
+			params.put("categorias", category);
 		}
 		if (colors != null && !colors.isEmpty()) {
-			params.put("colores-camiseta", colors);
+			params.put("colores", colors.stream().collect(Collectors.joining(" ")));
 		}
 		if (pattern != null && pattern.length() > 0) {
-			params.put("patron", pattern);
+			params.put("patrones", pattern);
 		}
 		if (stripesAmount != null && stripesAmount.length() > 0) {
-			params.put("cantidadBarras", Integer.valueOf(stripesAmount));
+			params.put("cantidadBarras", stripesAmount);
 		}
 		return params;
 	}

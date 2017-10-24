@@ -1,6 +1,7 @@
 package edu.uade.ia.tp7;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -26,29 +27,26 @@ public class ClipsService {
 		System.out.println("Initialization result is: " + result);
 	}
 
-	public List findFacts(String factAddress, Map<String, Object> params) throws Exception {
-		final List results = new ArrayList();
-		StringBuilder evalStr = new StringBuilder(
-				"(find-all-facts ((?var " + factAddress + ")) (and "
-		);
+	public List<Map<String, String>> findFacts(String factAddress, Map<String, String> params) throws Exception {
+		final List<Map<String, String>> results = new ArrayList<>();
 
-		params.forEach((k, v) -> {
-			if (v instanceof Number) {
-				evalStr.append("(= ?var:").append(k).append(" ").append(v).append(") ");
-			} else if (v instanceof List<?>) {
+		assertFacts(params);
 
-			} else {
-				evalStr.append("(eq ?var:").append(k).append(" ").append(v).append(") ");
-			}
-		});
-		evalStr.append("))");
-		PrimitiveValue pv = environment.eval(evalStr.toString());
+		String evalStr = "(find-all-facts ((?var " + factAddress + ")) TRUE)";
+		PrimitiveValue pv = environment.eval(evalStr);
 
 		if (pv instanceof MultifieldValue) {
 			MultifieldValue value = (MultifieldValue) pv;
+			Map<String, String> values = new HashMap<>();
 			for (Object factAddressRaw : value.multifieldValue()) {
 				FactAddressValue factAddressValue = (FactAddressValue) factAddressRaw;
-				results.add(factAddressValue.getFactSlot("nombre").toString());
+				values.put("NombreEquipo", factAddressValue.getFactSlot("NombreEquipo").toString());
+				values.put("ColoresCamiseta", factAddressValue.getFactSlot("ColoresCamiseta").toString());
+				values.put("Patron", factAddressValue.getFactSlot("Patron").toString());
+				values.put("CantidadBarras", factAddressValue.getFactSlot("CantidadBarras").toString());
+				values.put("Pais", factAddressValue.getFactSlot("Pais").toString());
+				values.put("Categoria", factAddressValue.getFactSlot("Categoria").toString());
+				results.add(values);
 			}
 		}
 
@@ -56,8 +54,25 @@ public class ClipsService {
 		System.out.println("Result is: " + result);
 		return results;
 	}
-	
+
+	private void assertFacts(Map<String, String> params) {
+		StringBuilder assertions = new StringBuilder();
+
+		params.forEach((k, v) -> {
+			assertions.append("(assert (")
+					.append(k)
+					.append(" ")
+					.append(v)
+					.append("))\n");
+		});
+
+		environment.eval(assertions.toString());
+		environment.run();
+	}
+
+
 	public void reset() throws Exception {
 		environment.reset();
 	}
 }
+
