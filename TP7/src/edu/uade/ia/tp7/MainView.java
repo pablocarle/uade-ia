@@ -120,9 +120,13 @@ public class MainView {
 		});
 		frmTp.getContentPane().add(btnClean);
 		
+
+		JScrollPane resultAreaScrollPane = new JScrollPane();
+
 		resultArea = new JTextArea();
-		resultArea.setBounds(25, 251, 404, 284);
-		frmTp.getContentPane().add(resultArea);
+		resultAreaScrollPane.setBounds(25, 251, 404, 284);
+		resultAreaScrollPane.setViewportView(resultArea);
+		frmTp.getContentPane().add(resultAreaScrollPane);
 		
 		comboCountry = new JComboBox<>();
 		comboCountry.setBounds(247, 18, 167, 24);

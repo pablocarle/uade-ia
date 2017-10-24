@@ -56,18 +56,20 @@ public class ClipsService {
 	}
 
 	private void assertFacts(Map<String, String> params) {
-		StringBuilder assertions = new StringBuilder();
-
 		params.forEach((k, v) -> {
+			StringBuilder assertions = new StringBuilder();
 			assertions.append("(assert (")
 					.append(k)
 					.append(" ")
 					.append(v)
 					.append("))\n");
-		});
 
-		environment.eval(assertions.toString());
-		environment.run();
+			System.out.println("Assert: " + assertions.toString());
+			PrimitiveValue pv = environment.eval(assertions.toString());
+			System.out.println("Assertions eval returned with: " + pv.getValue());
+			long result = environment.run();
+			System.out.println("Result of run after assertions: " + result);
+		});
 	}
 
 
