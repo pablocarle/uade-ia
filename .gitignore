@@ -27,3 +27,6 @@ CLIPSJNI/
 .settings/
 
 bin/
+
+.idea/
+*.iml
