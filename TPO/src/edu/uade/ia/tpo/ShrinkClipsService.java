@@ -15,7 +15,7 @@ public final class ShrinkClipsService {
     }
 
     private void initEnvironment() {
-
+        clips.reset();
     }
 
     public static ShrinkClipsService get() {
@@ -25,11 +25,17 @@ public final class ShrinkClipsService {
         return instance;
     }
 
-    public void addPatient(Patient patient) {
+    public void addPatient(Patient patient) throws Exception {
+        StringBuilder assertion = new StringBuilder();
 
+
+
+        clips.eval(assertion.toString());
     }
 
-    public void addPatientExam(Patient patient, Exam exam) {
+    public void addPatientExam(Patient patient, Exam exam) throws Exception {
+
+
 
     }
 }
