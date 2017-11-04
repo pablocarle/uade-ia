@@ -124,3 +124,8 @@
   (slot dni (type NUMBER))
   (slot diagnostico (type SYMBOL)) ; Un hecho por prediagnostico asignado
 )
+
+(deftemplate diagnostico
+	(slot dni (type NUMBER))
+	(slot asignacion (type STRING))
+)

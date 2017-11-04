@@ -1,9 +1,12 @@
 package edu.uade.ia.tpo;
 
 import net.sf.clipsrules.jni.Environment;
+import net.sf.clipsrules.jni.PrimitiveValue;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 public final class ShrinkClipsService {
@@ -76,5 +79,18 @@ public final class ShrinkClipsService {
 
 
         return builder.toString();
+    }
+
+    public Set<Patient> getLoadedPatients() {
+        Set<Patient> loadedPatients = new HashSet<>();
+
+
+        PrimitiveValue pv = clips.eval(buildFindPatientsFacts());
+
+        return loadedPatients;
+    }
+
+    private String buildFindPatientsFacts() {
+        return "";
     }
 }
