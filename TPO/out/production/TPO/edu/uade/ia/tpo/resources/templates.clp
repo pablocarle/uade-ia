@@ -122,5 +122,5 @@
 
 (deftemplate paciente_prediagnostico
   (slot dni (type NUMBER))
-  (multislot diagnosticos)
+  (slot diagnostico (type SYMBOL)) ; Un hecho por prediagnostico asignado
 )

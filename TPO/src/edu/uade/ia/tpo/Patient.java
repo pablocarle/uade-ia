@@ -34,6 +34,21 @@ public class Patient {
         this.age = age;
     }
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        Patient patient = (Patient) o;
+
+        return dni != null ? dni.equals(patient.dni) : patient.dni == null;
+    }
+
+    @Override
+    public int hashCode() {
+        return dni != null ? dni.hashCode() : 0;
+    }
+
     public String getName() {
         return name;
     }
