@@ -25,13 +25,22 @@
   (paciente
     (nombre "Pablo Carle")
     (dni 33456432)
+    (sexo MASCULINO)
+    (relacionFamiliar "casado")
+    (nivelEstudios UNIVERSITARIO)
+    (profesion "Estudiante")
+    (trabajo "Developer")
+    (aficiones "nada")
+    (gustos "nada")
+    (edad 29)
   )
-  (
+  (paciente_examen
+    (dni 33456432)
     (sintomas
-
+        SINTOMASCOMPULSIVOS
     )
     (antecedente
-
+        ESQUIZOFRENIA
     )
   )
 )

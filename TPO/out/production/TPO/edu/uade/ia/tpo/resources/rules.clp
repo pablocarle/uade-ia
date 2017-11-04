@@ -22,3 +22,21 @@
   =>
 
 )
+
+(defrule prediagnostico-impulsivo
+  ()
+  =>
+
+)
+
+(defrule prediagnostico-obsesivo
+  ()
+  =>
+
+)
+
+(defrule prediagnostico-
+  ()
+  =>
+
+)
