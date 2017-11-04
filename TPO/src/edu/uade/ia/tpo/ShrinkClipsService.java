@@ -15,6 +15,9 @@ public final class ShrinkClipsService {
     }
 
     private void initEnvironment() {
+        clips.load("/edu/uade/ia/tpo/resources/templates.clp"); // Load templates
+        clips.load("/edu/uade/ia/tpo/resources/rules.clp"); // Load rules
+        clips.load("/edu/uade/ia/tpo/resources/default_facts.clp");// TODO Load test facts (eliminar para prueba real)
         clips.reset();
     }
 
