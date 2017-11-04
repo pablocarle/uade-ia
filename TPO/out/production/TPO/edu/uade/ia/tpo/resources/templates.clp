@@ -3,7 +3,7 @@
 	(slot dni (type NUMBER))
 	(slot sexo (type SYMBOL)(allowed-values MASCULINO FEMENINO))
 	(slot relacionFamiliar (type STRING))
-	(slot nivelEstudios (type SYMBOL) (alowed-symbols SINESTUDIOS PRIMARIO SECUNDARIO TERCIARIO UNIVERSITARIO POSGRADO)
+	(slot nivelEstudios (type SYMBOL) (allowed-symbols SINESTUDIOS PRIMARIO SECUNDARIO TERCIARIO UNIVERSITARIO POSGRADO))
 	(slot profesion (type STRING))
 	(slot trabajo (type STRING))
 	(slot aficiones (type STRING))

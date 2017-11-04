@@ -19,6 +19,8 @@ public class MainFrame {
     private PatientListContentPane patientList;
     private PatientDataContentPane patientData;
 
+    private PatientExamContentPane patientExam;
+
     public MainFrame() {
         super();
         clipsService = ShrinkClipsService.get();

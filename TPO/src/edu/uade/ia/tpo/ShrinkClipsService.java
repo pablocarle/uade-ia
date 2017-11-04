@@ -1,6 +1,8 @@
 package edu.uade.ia.tpo;
 
 import net.sf.clipsrules.jni.Environment;
+import net.sf.clipsrules.jni.FactAddressValue;
+import net.sf.clipsrules.jni.MultifieldValue;
 import net.sf.clipsrules.jni.PrimitiveValue;
 
 import java.util.ArrayList;
@@ -22,9 +24,9 @@ public final class ShrinkClipsService {
     }
 
     private void initEnvironment() {
-        clips.load("/edu/uade/ia/tpo/resources/templates.clp"); // Load templates
-        clips.load("/edu/uade/ia/tpo/resources/rules.clp"); // Load rules
-        clips.load("/edu/uade/ia/tpo/resources/default_facts.clp");// TODO Load test facts (eliminar para prueba real)
+        clips.loadFromResource("/edu/uade/ia/tpo/resources/templates.clp"); // Load templates
+        clips.loadFromResource("/edu/uade/ia/tpo/resources/rules.clp"); // Load rules
+        clips.loadFromResource("/edu/uade/ia/tpo/resources/default_facts.clp");// TODO Load test facts (eliminar para prueba real)
         clips.reset();
     }
 
@@ -81,16 +83,29 @@ public final class ShrinkClipsService {
         return builder.toString();
     }
 
-    public Set<Patient> getLoadedPatients() {
+    public Set<Patient> getLoadedPatients() throws Exception {
         Set<Patient> loadedPatients = new HashSet<>();
-
-
-        PrimitiveValue pv = clips.eval(buildFindPatientsFacts());
-
+        PrimitiveValue pv = clips.eval("(find-all-facts ((?var paciente)) TRUE)");
+        if (pv instanceof MultifieldValue) {
+            MultifieldValue mv = (MultifieldValue) pv;
+            for (Object o : mv.multifieldValue()) {
+                FactAddressValue value = (FactAddressValue) o;
+                loadedPatients.add(
+                        new Patient(
+                                value.getFactSlot("nombre").toString(),
+                                Long.valueOf(value.getFactSlot("dni").toString()),
+                                Patient.Sexo.valueOf(value.getFactSlot("sexo").toString()),
+                                value.getFactSlot("relacionFamiliar").toString(),
+                                Patient.ScholarshipLevel.valueOf(value.getFactSlot("nivelEstudios").toString()),
+                                value.getFactSlot("profesion").toString(),
+                                value.getFactSlot("trabajo").toString(),
+                                value.getFactSlot("aficiones").toString(),
+                                value.getFactSlot("gustos").toString(),
+                                Integer.valueOf(value.getFactSlot("edad").toString())
+                        )
+                );
+            }
+        }
         return loadedPatients;
-    }
-
-    private String buildFindPatientsFacts() {
-        return "";
     }
 }
