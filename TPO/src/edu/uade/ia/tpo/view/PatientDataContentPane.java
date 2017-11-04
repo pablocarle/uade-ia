@@ -3,13 +3,14 @@ package edu.uade.ia.tpo.view;
 import edu.uade.ia.tpo.Patient;
 
 import javax.swing.*;
+import java.util.Arrays;
 
 public class PatientDataContentPane {
     private JTextField name;
     private JTextField dni;
     private JTextField familyRelation;
-    private JComboBox sex;
-    private JComboBox studyLevel;
+    private JComboBox<String> sex;
+    private JComboBox<String> studyLevel;
     private JTextField age;
     private JTextField profession;
     private JTextField work;
@@ -21,6 +22,17 @@ public class PatientDataContentPane {
 
     public PatientDataContentPane() {
         super();
+        initData();
+    }
+
+    private void initData() {
+        Arrays.stream(Patient.Sexo.values())
+                .map(Patient.Sexo::name)
+                .forEach(name -> sex.addItem(name));
+
+        Arrays.stream(Patient.ScholarshipLevel.values())
+                .map(Patient.ScholarshipLevel::name)
+                .forEach(name -> studyLevel.addItem(name));
     }
 
     public JPanel getView() {
@@ -80,6 +92,21 @@ public class PatientDataContentPane {
     }
 
     public Patient buildPatient() {
-        return null; //TODO
+        if (isValidForm()) {
+            return new Patient(
+                    name.getText(),
+                    Long.valueOf(dni.getText()),
+                    Patient.Sexo.valueOf(String.valueOf(sex.getSelectedItem())),
+                    familyRelation.getText(),
+                    Patient.ScholarshipLevel.valueOf(String.valueOf(studyLevel.getSelectedItem())),
+                    profession.getText(),
+                    work.getText(),
+                    hobbies.getText(),
+                    tastes.getText(),
+                    Integer.valueOf(age.getText())
+            );
+        } else {
+            throw new RuntimeException("Formulario invalido de paciente");
+        }
     }
 }

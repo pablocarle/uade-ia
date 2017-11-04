@@ -1,5 +1,6 @@
 package edu.uade.ia.tpo.view;
 
+import edu.uade.ia.tpo.Diagnostic;
 import edu.uade.ia.tpo.Patient;
 import edu.uade.ia.tpo.ShrinkClipsService;
 
@@ -20,6 +21,8 @@ public class MainFrame {
     private PatientDataContentPane patientData;
 
     private PatientExamContentPane patientExam;
+
+    private Patient selectedPatientForDiagnose;
 
     public MainFrame() {
         super();
@@ -48,16 +51,42 @@ public class MainFrame {
         patientList.getEvaluarButton()
                 .addActionListener(this::evaluatePatient);
 
+        patientExam.getCancelarButton()
+                .addActionListener(this::listPatientsForEvaluation);
+
+        patientExam.getEvaluarButton()
+                .addActionListener(this::diagnosePatient);
+
     }
 
+    /**
+     * Diagnosticar paciente seleccionado
+     * */
+    private void diagnosePatient(ActionEvent event) {
+        try {
+            java.util.List<Diagnostic> diagnostics = clipsService.runDiagnostic(selectedPatientForDiagnose);
+
+
+        } catch (Exception e) {
+            e.printStackTrace();
+            JOptionPane.showMessageDialog(null, MessageFormat.format("Ocurrio un error en el diagnostico del paciente {0}. [{1}]", selectedPatientForDiagnose.getName(), e.getMessage()));
+        }
+    }
+
+    /**
+     * Evaluar paciente seleccionado en lista de pacientes
+     *
+     * */
     private void evaluatePatient(ActionEvent event) {
         final Optional<Patient> patientOptional = patientList.getSelectedPatient();
         String patientName = "";
         if (patientOptional.isPresent()) {
             try {
-                Patient patient = patientOptional.get();
-                patientName = patient.getName();
-
+                selectedPatientForDiagnose = patientOptional.get();
+                patientName = selectedPatientForDiagnose.getName();
+                frame.setVisible(false);
+                frame.setContentPane(patientExam.getView());
+                frame.setVisible(true);
             } catch (Exception e) {
                 e.printStackTrace();
                 JOptionPane.showMessageDialog(null, MessageFormat.format("Ocurrio un error evaluando al paciente {0}. [{1}]", patientName, e.getMessage()));
@@ -117,6 +146,7 @@ public class MainFrame {
         actionsPane = new MainActionsPane();
         patientData = new PatientDataContentPane();
         patientList = new PatientListContentPane();
+        patientExam = new PatientExamContentPane();
 
         frame.setContentPane(actionsPane.getView());
     }

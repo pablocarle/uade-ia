@@ -60,7 +60,7 @@ public class PatientListContentPane {
         }
     }
 
-    public void loadPatients(Set<Patient> patients) {
+    void loadPatients(Set<Patient> patients) {
         patientTable.setModel(new PatientListModel(patients));
     }
 

@@ -28,4 +28,24 @@ public class PatientExamContentPane {
                 .map(Antecedent::getPretty)
                 .forEach(prettyAntecedent -> antecedentComboBox.addItem(prettyAntecedent));
     }
+
+    public JPanel getView() {
+        return view;
+    }
+
+    public JList<String> getSymptomList() {
+        return symptomList;
+    }
+
+    public JComboBox<String> getAntecedentComboBox() {
+        return antecedentComboBox;
+    }
+
+    public JButton getEvaluarButton() {
+        return evaluarButton;
+    }
+
+    public JButton getCancelarButton() {
+        return cancelarButton;
+    }
 }
