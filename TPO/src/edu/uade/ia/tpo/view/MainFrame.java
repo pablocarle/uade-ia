@@ -162,6 +162,12 @@ public class MainFrame {
     }
 
     public static void main(String[] args) {
+        try {
+            UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
+        } catch (ClassNotFoundException | UnsupportedLookAndFeelException | IllegalAccessException | InstantiationException e) {
+            e.printStackTrace();
+        }
+
         EventQueue.invokeLater(() -> {
             try {
                 MainFrame wnd = new MainFrame();

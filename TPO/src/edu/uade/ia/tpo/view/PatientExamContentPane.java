@@ -96,6 +96,13 @@ public class PatientExamContentPane {
 
         Arrays.stream(Antecedent.values())
                 .forEach(antecedent -> antecedentComboBox.addItem(antecedent));
+
+        physicalSymptoms.setRenderer(physicalSymptomsRenderer);
+        stateOfMindSymptoms.setRenderer(stateOfMindSymptomsRenderer);
+        feelingsSymptoms.setRenderer(feelingsSymptomsRenderer);
+        perturbationSymptoms.setRenderer(perturbationSymptomsRenderer);
+        desiresSymptoms.setRenderer(desiresSymptomsRenderer);
+        behaviouralSymptoms.setRenderer(behaviouralSymptomsRenderer);
     }
 
     JPanel getView() {
@@ -132,7 +139,23 @@ public class PatientExamContentPane {
     }
 
     private List<Symptom> getSelectedSymptoms() {
+        List<Symptom> selectedSymptoms = new ArrayList<>();
+        selectedSymptoms.addAll(physicalSymptomsRenderer.getSelectedSymptoms());
+        selectedSymptoms.addAll(stateOfMindSymptomsRenderer.getSelectedSymptoms());
+        selectedSymptoms.addAll(feelingsSymptomsRenderer.getSelectedSymptoms());
+        selectedSymptoms.addAll(perturbationSymptomsRenderer.getSelectedSymptoms());
+        selectedSymptoms.addAll(desiresSymptomsRenderer.getSelectedSymptoms());
+        selectedSymptoms.addAll(behaviouralSymptomsRenderer.getSelectedSymptoms());
+        return selectedSymptoms;
+    }
 
+    private void createUIComponents() {
+        physicalSymptoms = new JComboBox<>();
+        stateOfMindSymptoms = new JComboBox<>();
+        feelingsSymptoms = new JComboBox<>();
+        perturbationSymptoms = new JComboBox<>();
+        desiresSymptoms = new JComboBox<>();
+        behaviouralSymptoms = new JComboBox<>();
     }
 
     private class MultipleSelectionComboBoxRenderer implements ListCellRenderer<Symptom> {
@@ -149,7 +172,10 @@ public class PatientExamContentPane {
         @Override
         public Component getListCellRendererComponent(JList<? extends Symptom> list, Symptom value, int index, boolean isSelected, boolean cellHasFocus) {
             System.out.println(MessageFormat.format("ListCellRenderer. value: {0}. index: {1}. isSelected: {2}. cellHasFocus: {3}", value, index, isSelected, cellHasFocus));
-            return null;
+            if (isSelected) {
+                selected[index] = !selected[index];
+            }
+            return new JLabel(value.getPretty());
         }
 
         List<Symptom> getSelectedSymptoms() {

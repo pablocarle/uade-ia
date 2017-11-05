@@ -78,7 +78,7 @@
           <text value="Estados de animo"/>
         </properties>
       </component>
-      <component id="cda3d" class="javax.swing.JComboBox" binding="stateOfMindSymptoms">
+      <component id="cda3d" class="javax.swing.JComboBox" binding="stateOfMindSymptoms" custom-create="true">
         <constraints>
           <grid row="2" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="2" anchor="8" fill="1" indent="0" use-parent-layout="false"/>
         </constraints>
@@ -92,7 +92,7 @@
           <text value="Sentimientos"/>
         </properties>
       </component>
-      <component id="a02c3" class="javax.swing.JComboBox" binding="feelingsSymptoms">
+      <component id="a02c3" class="javax.swing.JComboBox" binding="feelingsSymptoms" custom-create="true">
         <constraints>
           <grid row="3" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="2" anchor="8" fill="1" indent="0" use-parent-layout="false"/>
         </constraints>
@@ -106,7 +106,7 @@
           <text value="Perturbacion"/>
         </properties>
       </component>
-      <component id="46412" class="javax.swing.JComboBox" binding="perturbationSymptoms">
+      <component id="46412" class="javax.swing.JComboBox" binding="perturbationSymptoms" custom-create="true">
         <constraints>
           <grid row="4" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="2" anchor="8" fill="1" indent="0" use-parent-layout="false"/>
         </constraints>
@@ -120,7 +120,7 @@
           <text value="Deseos"/>
         </properties>
       </component>
-      <component id="d653f" class="javax.swing.JComboBox" binding="desiresSymptoms">
+      <component id="d653f" class="javax.swing.JComboBox" binding="desiresSymptoms" custom-create="true">
         <constraints>
           <grid row="5" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="2" anchor="8" fill="1" indent="0" use-parent-layout="false"/>
         </constraints>
@@ -134,7 +134,7 @@
           <text value="Comportamiento"/>
         </properties>
       </component>
-      <component id="43503" class="javax.swing.JComboBox" binding="behaviouralSymptoms">
+      <component id="43503" class="javax.swing.JComboBox" binding="behaviouralSymptoms" custom-create="true">
         <constraints>
           <grid row="1" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="2" anchor="8" fill="1" indent="0" use-parent-layout="false"/>
         </constraints>
