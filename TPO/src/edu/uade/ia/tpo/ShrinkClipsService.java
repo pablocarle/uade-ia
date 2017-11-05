@@ -26,7 +26,7 @@ public final class ShrinkClipsService {
     private void initEnvironment() {
         clips.loadFromResource("/edu/uade/ia/tpo/resources/templates.clp"); // Load templates
         clips.loadFromResource("/edu/uade/ia/tpo/resources/rules.clp"); // Load rules
-        clips.loadFromResource("/edu/uade/ia/tpo/resources/default_facts.clp");// TODO Load test facts (eliminar para prueba real)
+        clips.loadFromResource("/edu/uade/ia/tpo/resources/default_facts.clp");// Load test facts
         clips.reset();
     }
 
@@ -58,6 +58,7 @@ public final class ShrinkClipsService {
                 " (dni " + patient.getDni() + ")" +
                 " (sintomas " + exam.getSymptoms()
                 .stream()
+                .distinct()
                 .map(Symptom::name)
                 .collect(Collectors.joining(" "))
                 .trim() + ")" +
@@ -71,7 +72,10 @@ public final class ShrinkClipsService {
         clips.run();
 
         final String diagnosticsFind = buildFindDiagnosticFacts();
+        PrimitiveValue pv = clips.eval(diagnosticsFind);
+        if (pv instanceof MultifieldValue) {
 
+        }
         return list;
     }
 

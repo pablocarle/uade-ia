@@ -9,6 +9,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.text.MessageFormat;
+import java.util.List;
 import java.util.Optional;
 
 public class MainFrame {
@@ -69,7 +70,7 @@ public class MainFrame {
             if (exam.isPresent()) {
                 clipsService.addPatientExam(selectedPatientForDiagnose, exam.get());
                 java.util.List<Diagnostic> diagnostics = clipsService.runDiagnostic(selectedPatientForDiagnose);
-                //TODO Show diagnostics
+                showDiagnostics(selectedPatientForDiagnose, exam.get(), diagnostics, patientExam.getResultTextArea());
             } else {
                 JOptionPane.showMessageDialog(null, MessageFormat.format("", ""));
             }
@@ -77,6 +78,14 @@ public class MainFrame {
             e.printStackTrace();
             JOptionPane.showMessageDialog(null, MessageFormat.format("Ocurrio un error en el diagnostico del paciente {0}. [{1}]", selectedPatientForDiagnose.getName(), e.getMessage()));
         }
+    }
+
+    private void showDiagnostics(Patient patient, Exam exam, List<Diagnostic> diagnostics, JTextArea resultArea) {
+        StringBuilder results = new StringBuilder("Paciente: ");
+        results.append(patient.getName()).append("\n");
+
+        diagnostics.forEach(diagnostic -> results.append("")); //TODO
+        resultArea.setText(results.toString());
     }
 
     /**

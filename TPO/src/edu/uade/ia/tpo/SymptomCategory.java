@@ -7,7 +7,6 @@ public enum SymptomCategory {
     FEELINGS,
     PERTURBATION,
     DESIRES,
-    BEHAVIOUR,
-    NOSE //TODO Revisar estos
+    BEHAVIOUR
 
 }

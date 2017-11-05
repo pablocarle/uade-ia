@@ -172,13 +172,13 @@ public class PatientExamContentPane {
         @Override
         public Component getListCellRendererComponent(final JList<? extends Symptom> list, final Symptom value, final int index, final boolean isSelected, final boolean cellHasFocus) {
             //System.out.println(MessageFormat.format("ListCellRenderer. value: {0}. index: {1}. isSelected: {2}. cellHasFocus: {3}", value, index, isSelected, cellHasFocus));
-            LayoutManager manager = new FlowLayout(FlowLayout.LEFT);
-            JPanel component = new JPanel(manager);
-            JLabel label = new JLabel(value.getPretty());
-            JCheckBox checkBox = new JCheckBox();
+            final LayoutManager manager = new FlowLayout(FlowLayout.LEFT);
+            final JPanel component = new JPanel(manager);
+            final JLabel label = new JLabel(value.getPretty());
+            final JCheckBox checkBox = new JCheckBox();
 
-            Color bg = DefaultLookup.getColor(label, label.getUI(), "List.dropCellBackground");
-            Color fg = DefaultLookup.getColor(label, label.getUI(), "List.dropCellForeground");
+            final Color bg = DefaultLookup.getColor(label, label.getUI(), "List.dropCellBackground");
+            final Color fg = DefaultLookup.getColor(label, label.getUI(), "List.dropCellForeground");
 
             if (isSelected) {
                 if (index >= 0) {
