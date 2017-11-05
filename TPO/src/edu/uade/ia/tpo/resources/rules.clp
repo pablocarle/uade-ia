@@ -1,3 +1,12 @@
+(defrule antecedente-neurosis
+  ()
+  =>
+  (assert
+    ()
+  )
+)
+
+
 (defrule prediagnostico-inestabilidad-emocional
   (paciente_examen
     (dni ?dni)

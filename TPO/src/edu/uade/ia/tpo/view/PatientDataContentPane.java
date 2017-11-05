@@ -6,6 +6,7 @@ import javax.swing.*;
 import java.util.Arrays;
 
 public class PatientDataContentPane {
+
     private JTextField name;
     private JTextField dni;
     private JTextField familyRelation;
@@ -88,10 +89,25 @@ public class PatientDataContentPane {
     }
 
     public boolean isValidForm() {
-        return false;
+        boolean nameRequired = name.getText() != null  && name.getText().trim().length() > 0;
+        boolean dniRequiredAndIsNumber = dni.getText() != null && dni.getText().trim().length() > 0
+                && dni.getText().matches("\\d+");
+        boolean sexRequired = sex.getSelectedItem() != null && String.valueOf(sex.getSelectedItem()).trim().length() > 0;
+        boolean familyRelationRequired = familyRelation.getText() != null && familyRelation.getText().trim().length() > 0;
+        boolean scholarshipLevelRequired = studyLevel.getSelectedItem() != null && String.valueOf(studyLevel.getSelectedItem()).trim().length() > 0;
+        boolean professionRequired = profession.getText() != null && profession.getText().trim().length() > 0;
+        boolean workRequired = work.getText() != null && work.getText().trim().length() > 0;
+        boolean hobbiesRequired = hobbies.getText() != null && hobbies.getText().trim().length() > 0;
+        boolean tastesRequired = tastes.getText() != null && tastes.getText().trim().length() > 0;
+        boolean ageRequiredAndIsNumber = age.getText() != null && age.getText().trim().length() > 0
+                && age.getText().matches("\\d+");
+
+        return nameRequired && sexRequired && familyRelationRequired && scholarshipLevelRequired
+                && professionRequired && workRequired && hobbiesRequired && tastesRequired
+                && ageRequiredAndIsNumber && dniRequiredAndIsNumber;
     }
 
-    public Patient buildPatient() {
+    Patient buildPatient() {
         if (isValidForm()) {
             return new Patient(
                     name.getText(),

@@ -50,7 +50,8 @@ public final class ShrinkClipsService {
                 " (gustos " + "\"" + patient.getPersonalTastes() + "\")" +
                 " (edad " + patient.getAge() + ")" +
                 "))";
-        clips.eval(assertion);
+        PrimitiveValue pv = clips.eval(assertion);
+        System.out.println("Patient creation returned with: " + pv);
     }
 
     public void addPatientExam(Patient patient, Exam exam) {
