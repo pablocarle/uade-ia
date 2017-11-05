@@ -68,9 +68,8 @@ public class MainFrame {
             Optional<Exam> exam = patientExam.buildExam();
             if (exam.isPresent()) {
                 clipsService.addPatientExam(selectedPatientForDiagnose, exam.get());
-
                 java.util.List<Diagnostic> diagnostics = clipsService.runDiagnostic(selectedPatientForDiagnose);
-
+                //TODO Show diagnostics
             } else {
                 JOptionPane.showMessageDialog(null, MessageFormat.format("", ""));
             }
@@ -121,6 +120,10 @@ public class MainFrame {
         if (patientData.isValidForm()) {
             try {
                 clipsService.addPatient(patientData.buildPatient());
+                JOptionPane.showMessageDialog(null, "Paciente creado exitosamente");
+                frame.setVisible(false);
+                frame.setContentPane(actionsPane.getView());
+                frame.setVisible(true);
             } catch (Exception e) {
                 e.printStackTrace();
                 JOptionPane.showMessageDialog(null, "Ocurrio un error creando el paciente. [" + e.getMessage() + "]");

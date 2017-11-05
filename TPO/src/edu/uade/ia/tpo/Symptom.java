@@ -1,29 +1,31 @@
 package edu.uade.ia.tpo;
 
 public enum Symptom {
-    GANASDELLORAR("Ganas de Llorar"),
-    GANASDEREIR("Ganas de Reir"),
-    CAMBIOSDEESTADODEANIMO("Cambios de estado de animo"),
-    INESTABILIDADEMOCIONAL("Inestabilidad emocional"),
-    DOLENCIASCORPORALES("Dolencias corporales"),
-    IMPULSOS("Impulsos"),
-    SINTOMASCOMPULSIVOS("Sintomas compulsivos"),
-    IMPULSIVO("Impulsivo"),
-    REORDENACOSASPREVIAMENTEORDENADAS("Reordena cosas previamente ordenadas"),
-    ANSIEDAD("Ansiedad"),
-    OBSESIVO("Obsesivo"),
-    IDEASOBSESIVAS("Ideas obsesivas"),
-    NEUROSISOBSESIVA("Neurosis obsesiva"),
-    IMAGENESRECURRENTES("Imagenes recurrentes"),
-    TEMORESESPECIFICOS("Temores especificos"),
-    PERSECUCION("Persecucion"),
-    FOBIA("Fobia"),
-    DELIRIOS("Delirios"),
-    ALUCIONACIONES("Alucinaciones"),
-    PERCEPCIONALTERADA("Percepcion alterada"),
-    DESORGANIZADO("Desorganizado"),
-    COMPORTAMIENTOCATATONICO("Comportamiento catatonico"),
-    AUSENCIAEMOCIONAL("Ausencia emocional"),
+
+    NINGUNO("Ninguno", null),
+    GANASDELLORAR("Ganas de Llorar", SymptomCategory.STATE_OF_MIND),
+    GANASDEREIR("Ganas de Reir", SymptomCategory.STATE_OF_MIND),
+    CAMBIOSDEESTADODEANIMO("Cambios de estado de animo", SymptomCategory.STATE_OF_MIND),
+    INESTABILIDADEMOCIONAL("Inestabilidad emocional", SymptomCategory.STATE_OF_MIND),
+    DOLENCIASCORPORALES("Dolencias corporales", SymptomCategory.PHYSICAL),
+    IMPULSOS("Impulsos", SymptomCategory.DESIRES),
+    SINTOMASCOMPULSIVOS("Sintomas compulsivos", SymptomCategory.BEHAVIOUR),
+    IMPULSIVO("Impulsivo", SymptomCategory.DESIRES),
+    REORDENACOSASPREVIAMENTEORDENADAS("Reordena cosas previamente ordenadas", SymptomCategory.BEHAVIOUR),
+    ANSIEDAD("Ansiedad", SymptomCategory.PERTURBATION),
+    OBSESIVO("Obsesivo", SymptomCategory.PERTURBATION),
+    IDEASOBSESIVAS("Ideas obsesivas", SymptomCategory.PERTURBATION),
+    NEUROSISOBSESIVA("Neurosis obsesiva", SymptomCategory.PERTURBATION),
+    IMAGENESRECURRENTES("Imagenes recurrentes", SymptomCategory.PERTURBATION),
+    TEMORESESPECIFICOS("Temores especificos", SymptomCategory.PERTURBATION),
+    PERSECUCION("Persecucion", SymptomCategory.PERTURBATION),
+    FOBIA("Fobia", SymptomCategory.PERTURBATION),
+    DELIRIOS("Delirios", SymptomCategory.PERTURBATION),
+    ALUCIONACIONES("Alucinaciones", SymptomCategory.PERTURBATION),
+    PERCEPCIONALTERADA("Percepcion alterada", SymptomCategory.PERTURBATION),
+    DESORGANIZADO("Desorganizado", SymptomCategory.BEHAVIOUR),
+    COMPORTAMIENTOCATATONICO("Comportamiento catatonico", SymptomCategory.BEHAVIOUR),
+    AUSENCIAEMOCIONAL("Ausencia emocional", ),
     ESQUIZOFRENIA("Esquizofrenia"),
     DELIRIOSDEPERSECUCION("Delirios de persecucion"),
     EROTOMANIA("Erotomania"),
@@ -43,7 +45,7 @@ public enum Symptom {
     ESTADOSDEANIMOIRRITABLES("Estados de animo irritables"),
     ESTADOSMANIACODEHIPERACTIVIDAD("Estados maniaco de hiperactividad"),
     VERBORRAGIA("Verborragia"),
-    PENSAMIENTOACELERADO("PEnsamiento acelerado"),
+    PENSAMIENTOACELERADO("Pensamiento acelerado"),
     ACELERAMIENTO("Aceleramiento"),
     DESMOTIVACION("Desmotivacion"),
     DESGANO("Desgano"),
@@ -78,13 +80,19 @@ public enum Symptom {
     HISTERIA("Histeria");
 
     private final String pretty;
+    private final SymptomCategory category;
 
-    Symptom(String pretty) {
+    Symptom(String pretty, SymptomCategory category) {
         this.pretty = pretty;
+        this.category = category;
     }
 
     public String getPretty() {
         return this.pretty;
+    }
+
+    public SymptomCategory getCategory() {
+        return category;
     }
 
     @Override
