@@ -1,51 +1,85 @@
 (defrule antecedente-neurosis
-  ()
-  =>
-  (assert
-    ()
-  )
-)
-
-
-(defrule prediagnostico-inestabilidad-emocional
   (paciente_examen
     (dni ?dni)
-    (sintomas $?sintomas)
+    (antecedente NEUROSIS)
   )
-  ; verificar validaciones
+  ?PACIENTE <- (paciente
+    (dni ?dni)
+    (diagnostico NOSE)
+    (prediagnostico NOSE)
+  )
   =>
   (assert
     (paciente_prediagnostico
       (dni ?dni)
-
+      (diagnostico NEUROSIS)
     )
   )
+  (modify ?PACIENTE
+    (prediagnostico ASIGNADO)
+  )
+  (printout t "Asignado prediagnostico neurosis" crlf)
 )
 
-(defrule prediagnostico-histeria
+(defrule antecedente-neurosis-asignado
   (paciente_examen
     (dni ?dni)
-    (sintomas $?sintomas)
+    (antecedente NEUROSIS)
   )
-  ; verificar sintomas (ver funciones multislot)
+  (paciente
+    (dni ?dni)
+    (diagnostico NOSE)
+    (prediagnostico ASIGNADO)
+  )
+  (paciente_prediagnostico
+    (dni ?dni)
+    (diagnostico $?diagnosticos)
+  )
+  (test (not (subsetp (create$ NEUROSIS) $?diagnosticos)))
   =>
-
+  (insert$ $?diagnosticos 1 NEUROSIS)
+  (printout t "Insertado prediagnostico NEUROSIS" crlf)
 )
 
-(defrule prediagnostico-impulsivo
-  ()
+(defrule antecedente-psicosis
+  (paciente_examen
+    (dni ?dni)
+    (antecedente PSICOSIS)
+  )
+  ?PACIENTE <- (paciente
+    (dni ?dni)
+    (diagnostico NOSE)
+    (prediagnostico NOSE)
+  )
   =>
-
+  (assert
+    (paciente_prediagnostico
+      (dni ?dni)
+      (diagnostico PSICOSIS)
+    )
+  )
+  (modify ?PACIENTE
+    (prediagnostico ASIGNADO)
+  )
+  (printout t "Asignado prediagnostico psicosis" crlf)
 )
 
-(defrule prediagnostico-obsesivo
-  ()
+(defrule antecedente-psicosis-asignado
+  (paciente_examen
+    (dni ?dni)
+    (antecedente PSICOSIS)
+  )
+  (paciente
+    (dni ?dni)
+    (diagnostico NOSE)
+    (prediagnostico ASIGNADO)
+  )
+  (paciente_prediagnostico
+    (dni ?dni)
+    (diagnostico $?diagnosticos)
+  )
+  (test (not (subsetp (create$ PSICOSIS) $?diagnosticos)))
   =>
-
-)
-
-(defrule prediagnostico-
-  ()
-  =>
-
+  (insert$ $?diagnosticos 1 PSICOSIS)
+  (printout t "Insertado prediagnostico PSICOSIS" crlf)
 )

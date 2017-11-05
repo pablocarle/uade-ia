@@ -12,6 +12,9 @@ import java.text.MessageFormat;
 import java.util.List;
 import java.util.Optional;
 
+/**
+ * Application entry point
+ * */
 public class MainFrame {
 
     private ShrinkClipsService clipsService;
