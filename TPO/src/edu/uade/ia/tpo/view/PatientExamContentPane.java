@@ -1,15 +1,17 @@
 package edu.uade.ia.tpo.view;
 
 import edu.uade.ia.tpo.Antecedent;
+import edu.uade.ia.tpo.Exam;
 import edu.uade.ia.tpo.Symptom;
 
 import javax.swing.*;
 import java.util.Arrays;
+import java.util.Optional;
 
 public class PatientExamContentPane {
     private JPanel view;
-    private JList<String> symptomList;
-    private JComboBox<String> antecedentComboBox;
+    private JList<Symptom> symptomList;
+    private JComboBox<Antecedent> antecedentComboBox;
     private JButton evaluarButton;
     private JButton cancelarButton;
 
@@ -19,33 +21,34 @@ public class PatientExamContentPane {
     }
 
     private void initData() {
-        symptomList.setListData(
-                Arrays.stream(Symptom.values())
-                        .map(Symptom::getPretty)
-                        .toArray(String[]::new));
+        symptomList.setListData(Symptom.values());
 
         Arrays.stream(Antecedent.values())
-                .map(Antecedent::getPretty)
-                .forEach(prettyAntecedent -> antecedentComboBox.addItem(prettyAntecedent));
+                .forEach(antecedent -> antecedentComboBox.addItem(antecedent));
     }
 
-    public JPanel getView() {
+    JPanel getView() {
         return view;
     }
 
-    public JList<String> getSymptomList() {
-        return symptomList;
-    }
-
-    public JComboBox<String> getAntecedentComboBox() {
-        return antecedentComboBox;
-    }
-
-    public JButton getEvaluarButton() {
+    JButton getEvaluarButton() {
         return evaluarButton;
     }
 
-    public JButton getCancelarButton() {
+    JButton getCancelarButton() {
         return cancelarButton;
+    }
+
+    Optional<Exam> buildExam() {
+        if (antecedentComboBox.getSelectedItem() != null && !symptomList.getSelectedValuesList().isEmpty()) {
+            return Optional.of(
+                    new Exam(
+                            symptomList.getSelectedValuesList(),
+                            (Antecedent) antecedentComboBox.getSelectedItem()
+                    )
+            );
+        } else {
+            return Optional.empty();
+        }
     }
 }

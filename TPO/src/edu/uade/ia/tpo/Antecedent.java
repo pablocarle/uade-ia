@@ -34,4 +34,9 @@ public enum Antecedent {
         return this.pretty;
     }
 
+
+    @Override
+    public String toString() {
+        return pretty;
+    }
 }

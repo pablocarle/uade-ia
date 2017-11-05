@@ -1,6 +1,7 @@
 package edu.uade.ia.tpo.view;
 
 import edu.uade.ia.tpo.Diagnostic;
+import edu.uade.ia.tpo.Exam;
 import edu.uade.ia.tpo.Patient;
 import edu.uade.ia.tpo.ShrinkClipsService;
 
@@ -64,9 +65,15 @@ public class MainFrame {
      * */
     private void diagnosePatient(ActionEvent event) {
         try {
-            java.util.List<Diagnostic> diagnostics = clipsService.runDiagnostic(selectedPatientForDiagnose);
+            Optional<Exam> exam = patientExam.buildExam();
+            if (exam.isPresent()) {
+                clipsService.addPatientExam(selectedPatientForDiagnose, exam.get());
 
+                java.util.List<Diagnostic> diagnostics = clipsService.runDiagnostic(selectedPatientForDiagnose);
 
+            } else {
+                JOptionPane.showMessageDialog(null, MessageFormat.format("", ""));
+            }
         } catch (Exception e) {
             e.printStackTrace();
             JOptionPane.showMessageDialog(null, MessageFormat.format("Ocurrio un error en el diagnostico del paciente {0}. [{1}]", selectedPatientForDiagnose.getName(), e.getMessage()));
