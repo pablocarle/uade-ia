@@ -4,10 +4,10 @@ import edu.uade.ia.tpo.Antecedent;
 import edu.uade.ia.tpo.Exam;
 import edu.uade.ia.tpo.Symptom;
 import edu.uade.ia.tpo.SymptomCategory;
+import sun.swing.DefaultLookup;
 
 import javax.swing.*;
 import java.awt.*;
-import java.text.MessageFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -170,12 +170,35 @@ public class PatientExamContentPane {
         }
 
         @Override
-        public Component getListCellRendererComponent(JList<? extends Symptom> list, Symptom value, int index, boolean isSelected, boolean cellHasFocus) {
-            System.out.println(MessageFormat.format("ListCellRenderer. value: {0}. index: {1}. isSelected: {2}. cellHasFocus: {3}", value, index, isSelected, cellHasFocus));
+        public Component getListCellRendererComponent(final JList<? extends Symptom> list, final Symptom value, final int index, final boolean isSelected, final boolean cellHasFocus) {
+            //System.out.println(MessageFormat.format("ListCellRenderer. value: {0}. index: {1}. isSelected: {2}. cellHasFocus: {3}", value, index, isSelected, cellHasFocus));
+            LayoutManager manager = new FlowLayout(FlowLayout.LEFT);
+            JPanel component = new JPanel(manager);
+            JLabel label = new JLabel(value.getPretty());
+            JCheckBox checkBox = new JCheckBox();
+
+            Color bg = DefaultLookup.getColor(label, label.getUI(), "List.dropCellBackground");
+            Color fg = DefaultLookup.getColor(label, label.getUI(), "List.dropCellForeground");
+
             if (isSelected) {
-                selected[index] = !selected[index];
+                if (index >= 0) {
+                    selected[index] = !selected[index];
+                }
+                label.setBackground(bg == null ? list.getSelectionBackground() : bg);
+                label.setForeground(fg == null ? list.getSelectionForeground() : fg);
+            } else {
+                label.setBackground(list.getBackground());
+                label.setForeground(list.getForeground());
             }
-            return new JLabel(value.getPretty());
+
+            if (index >= 0) {
+                checkBox.setSelected(selected[index]);
+            }
+
+            component.add(checkBox);
+            component.add(label);
+
+            return component;
         }
 
         List<Symptom> getSelectedSymptoms() {
