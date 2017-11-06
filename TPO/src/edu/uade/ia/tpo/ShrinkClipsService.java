@@ -73,7 +73,7 @@ public final class ShrinkClipsService {
 
         clips.run();
 
-        final String diagnosticsFind = buildFindDiagnosticFacts();
+        final String diagnosticsFind = buildFindDiagnosticFacts(patient.getDni());
         PrimitiveValue pv = clips.eval(diagnosticsFind);
         if (pv instanceof MultifieldValue) {
 
@@ -81,12 +81,8 @@ public final class ShrinkClipsService {
         return list;
     }
 
-    private String buildFindDiagnosticFacts() {
-        StringBuilder builder = new StringBuilder();
-        builder.append("(find-all-facts (()) TRUE");
-
-
-        return builder.toString();
+    private String buildFindDiagnosticFacts(long dni) {
+        return ("(find-all-facts ((?var paciente_diagnostico)) (eq ?var:dni " + dni + "))");
     }
 
     public Set<Patient> getLoadedPatients() throws Exception {
