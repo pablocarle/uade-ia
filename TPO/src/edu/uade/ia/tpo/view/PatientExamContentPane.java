@@ -110,6 +110,36 @@ public class PatientExamContentPane {
                 physicalSymptomsRenderer.setSelectedSymptom(physicalSymptoms.getSelectedIndex());
             }
         });
+
+        stateOfMindSymptoms.addItemListener(event -> {
+            if (ItemEvent.SELECTED == event.getStateChange()) {
+                stateOfMindSymptomsRenderer.setSelectedSymptom(stateOfMindSymptoms.getSelectedIndex());
+            }
+        });
+
+        feelingsSymptoms.addItemListener(event -> {
+            if (ItemEvent.SELECTED == event.getStateChange()) {
+                feelingsSymptomsRenderer.setSelectedSymptom(feelingsSymptoms.getSelectedIndex());
+            }
+        });
+
+        perturbationSymptoms.addItemListener(event -> {
+            if (ItemEvent.SELECTED == event.getStateChange()) {
+                perturbationSymptomsRenderer.setSelectedSymptom(perturbationSymptoms.getSelectedIndex());
+            }
+        });
+
+        desiresSymptoms.addItemListener(event -> {
+            if (ItemEvent.SELECTED == event.getStateChange()) {
+                desiresSymptomsRenderer.setSelectedSymptom(desiresSymptoms.getSelectedIndex());
+            }
+        });
+
+        behaviouralSymptoms.addItemListener(event -> {
+            if (ItemEvent.SELECTED == event.getStateChange()) {
+                behaviouralSymptomsRenderer.setSelectedSymptom(behaviouralSymptoms.getSelectedIndex());
+            }
+        });
     }
 
     JPanel getView() {
