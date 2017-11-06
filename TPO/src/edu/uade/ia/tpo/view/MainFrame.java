@@ -17,6 +17,9 @@ import java.util.Optional;
  * */
 public class MainFrame {
 
+    private static final Rectangle DEFAULT_BOUNDS = new Rectangle(400, 100, 1024, 768);
+    private static final Rectangle EXAM_BOUNDS = new Rectangle(400, 100, 1024, 768);
+
     private ShrinkClipsService clipsService;
 
     private JFrame frame;
@@ -103,6 +106,7 @@ public class MainFrame {
                 selectedPatientForDiagnose = patientOptional.get();
                 patientName = selectedPatientForDiagnose.getName();
                 frame.setVisible(false);
+                frame.setBounds(EXAM_BOUNDS);
                 frame.setContentPane(patientExam.getView());
                 frame.setVisible(true);
             } catch (Exception e) {
@@ -116,6 +120,7 @@ public class MainFrame {
 
     private void listPatientsForEvaluation(ActionEvent event) {
         frame.setVisible(false);
+        frame.setBounds(DEFAULT_BOUNDS);
         frame.setContentPane(patientList.getView());
 
         try {
@@ -134,6 +139,7 @@ public class MainFrame {
                 clipsService.addPatient(patientData.buildPatient());
                 JOptionPane.showMessageDialog(null, "Paciente creado exitosamente");
                 frame.setVisible(false);
+                frame.setBounds(DEFAULT_BOUNDS);
                 frame.setContentPane(actionsPane.getView());
                 frame.setVisible(true);
             } catch (Exception e) {
@@ -160,7 +166,7 @@ public class MainFrame {
     private void initialize() {
         frame = new JFrame();
         frame.setTitle("PsicoSoft");
-        frame.setBounds(100, 100, 800, 600);
+        frame.setBounds(DEFAULT_BOUNDS);
         frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         frame.setResizable(false);
         frame.setLayout(new GridBagLayout());

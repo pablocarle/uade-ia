@@ -5,10 +5,16 @@
     (prediagnostico NOSE)
   )
   (paciente_examen
-    (sintomas
-
-    )
+    (dni ?dni)
+    (sintomas $?sintomas)
   )
+  (test (subsetp (create$ GANASDEREIR GANASDELLORAR CAMBIOSDEESTADODEANIMO) $?sintomas))
+  =>
+  ()
+)
+
+(defrule prediagnostico-inestabilidad-emocional-asignado
+  ()
   =>
 
 )

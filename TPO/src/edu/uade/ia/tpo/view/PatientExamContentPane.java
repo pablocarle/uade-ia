@@ -9,7 +9,6 @@ import sun.swing.DefaultLookup;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ItemEvent;
-import java.text.MessageFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
