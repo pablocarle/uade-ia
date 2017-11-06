@@ -17,7 +17,7 @@ public final class ShrinkClipsService {
 
     private final Environment clips;
 
-    private ThreadLocal<Long> lastExecutionTime;
+    private ThreadLocal<Long> lastExecutionTime = new ThreadLocal<>();
 
     private ShrinkClipsService() {
         super();
@@ -89,7 +89,7 @@ public final class ShrinkClipsService {
             MultifieldValue mv = (MultifieldValue) pv;
             for (Object o : mv.multifieldValue()) {
                 FactAddressValue value = (FactAddressValue) o;
-                list.add(new Diagnostic(patient, value.getFactSlot("").toString())); //TODO
+                list.add(new Diagnostic(patient, value.getFactSlot("diagnostico").toString())); //TODO
             }
         } else {
             throw new Exception("Ocurrio un error al diagnosticar. Resultado: " + pv);

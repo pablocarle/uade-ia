@@ -95,6 +95,7 @@ public class MainFrame {
         results.append(patient.getName()).append("\n");
         results.append("Examen: \n");
         results.append(exam.toString());
+        results.append("\n\n");
 
         if (diagnostics.isEmpty()) {
             results.append("No hay suficiente información para determinar un diagnóstico\n");

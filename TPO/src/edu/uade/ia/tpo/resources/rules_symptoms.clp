@@ -84,11 +84,11 @@
 )
 
 ; TODO Regla 25. Verificar contra los prediagnosticos
-(defrule prediagnostico-neurosisobsesiva
-  ()
-  =>
-
-)
+;(defrule prediagnostico-neurosisobsesiva
+;  ()
+;  =>
+;
+;)
 
 (defrule prediagnostico-persecusion
   (paciente_examen
@@ -112,11 +112,11 @@
 )
 
 ; TODO Regla 27. Verificar contra los prediagnosticos
-(defrule prediagnostico-fobia
-  ()
-  =>
-
-)
+;(defrule prediagnostico-fobia
+;  ()
+;  =>
+;
+;)
 
 (defrule prediagnostico-percepcionalterada
   (paciente_examen
@@ -204,7 +204,7 @@
   (delete-member$ $?diagnosticos NOSE)
 )
 
-; inferencia 30
+; inferencia 32
 (defrule prediagnostico-animodepresivo
   (paciente_examen
     (dni ?dni)
@@ -225,3 +225,301 @@
   (insert$ $?diagnosticos 1 ESTADOSDEANIMODEPRESIVOS)
   (delete-member$ $?diagnosticos NOSE)
 )
+
+; inferencia 33
+(defrule prediagnostico-desmotivacion
+  (paciente_examen
+    (dni ?dni)
+    (sintomas $?sintomas)
+  )
+  (paciente_prediagnostico
+    (dni ?dni)
+    (diagnostico $?diagnosticos)
+  )
+  (test (not (subsetp (create$ DESMOTIVACION) $?diagnosticos)))
+  (test
+    (and
+      (member$ PERDIDADEINTERES $?sintomas)
+      (member$ PERDIDADECAPACIDADPARAELPLACER $?sintomas)
+    )
+  )
+  =>
+  (insert$ $?diagnosticos 1 DESMOTIVACION)
+  (delete-member$ $?diagnosticos NOSE)
+)
+
+; inferencia 34
+(defrule prediagnostico-desgano
+  (paciente_examen
+    (dni ?dni)
+    (sintomas $?sintomas)
+  )
+  (paciente_prediagnostico
+    (dni ?dni)
+    (diagnostico $?diagnosticos)
+  )
+  (test (not (subsetp (create$ DESGANO) $?diagnosticos)))
+  (test
+    (and
+      (member$ FALTADEENERGIA $?sintomas)
+      (member$ FALTADEVOLUNTAD $?sintomas)
+    )
+  )
+  =>
+  (insert$ $?diagnosticos 1 DESGANO)
+  (delete-member$ $?diagnosticos NOSE)
+)
+
+; inferencia 35
+(defrule prediagnostico-tendenciasuicida
+  (paciente_examen
+    (dni ?dni)
+    (sintomas $?sintomas)
+  )
+  (paciente_prediagnostico
+    (dni ?dni)
+    (diagnostico $?diagnosticos)
+  )
+  (test (not (subsetp (create$ TENDENCIASUICIDA) $?diagnosticos)))
+  (test
+    (and
+      (member$ SENTIMIENTODECULPA $?sintomas)
+      (member$ IDEASDESUICIDIO $?sintomas)
+    )
+  )
+  =>
+  (insert$ $?diagnosticos 1 TENDENCIASUICIDA)
+  (delete-member$ $?diagnosticos NOSE)
+)
+
+; inferencia 36
+(defrule prediagnostico-hiperactividad
+  (paciente_examen
+    (dni ?dni)
+    (sintomas $?sintomas)
+  )
+  (paciente_prediagnostico
+    (dni ?dni)
+    (diagnostico $?diagnosticos)
+  )
+  (test (not (subsetp (create$ ESTADOSMANIACODEHIPERACTIVIDAD) $?diagnosticos)))
+  (test
+    (and
+      (member$ INSOMNIO $?sintomas)
+      (member$ ESTADOSDEANIMOIRRITABLES $?sintomas)
+    )
+  )
+  =>
+  (insert$ $?diagnosticos 1 ESTADOSMANIACODEHIPERACTIVIDAD)
+  (delete-member$ $?diagnosticos NOSE)
+)
+
+; inferencia 37
+(defrule prediagnostico-aceleramiento
+  (paciente_examen
+    (dni ?dni)
+    (sintomas $?sintomas)
+  )
+  (paciente_prediagnostico
+    (dni ?dni)
+    (diagnostico $?diagnosticos)
+  )
+  (test (not (subsetp (create$ ACELERAMIENTO) $?diagnosticos)))
+  (test
+    (or
+      (member$ VERBORRAGIA $?sintomas)
+      (member$ PENSAMIENTOACELERADO $?sintomas)
+    )
+  )
+  =>
+  (insert$ $?diagnosticos 1 ACELERAMIENTO)
+  (delete-member$ $?diagnosticos NOSE)
+)
+
+; TODO Inferencia 38 mezcla
+;(defrule prediagnostico-psicosismaniacodepresiva
+;  ()
+;  =>
+;
+;)
+
+; Inferencia 39
+(defrule prediagnostico-estrestemporal
+  (paciente_examen
+    (dni ?dni)
+    (sintomas $?sintomas)
+  )
+  (paciente_prediagnostico
+    (dni ?dni)
+    (diagnostico $?diagnosticos)
+  )
+  (test (not (subsetp (create$ ESTRESTEMPORAL) $?diagnosticos)))
+  (test
+    (and
+      (member$ MIEDOINTENSOTEMPORAL $?sintomas)
+      (member$ MALESTARINTENSOTEMPORAL $?sintomas)
+    )
+  )
+  =>
+  (insert$ $?diagnosticos 1 ESTRESTEMPORAL)
+  (delete-member$ $?diagnosticos NOSE)
+)
+
+; Inferencia 40
+(defrule prediagnostico-fuerteangustia
+  (paciente_examen
+    (dni ?dni)
+    (sintomas $?sintomas)
+  )
+  (paciente_prediagnostico
+    (dni ?dni)
+    (diagnostico $?diagnosticos)
+  )
+  (test (not (subsetp (create$ FUERTEANGUSTIA) $?diagnosticos)))
+  (test
+    (and
+      (member$ PALPITACIONES $?sintomas)
+      (member$ SUDORACION $?sintomas)
+      (member$ SENSACIONDEAHOGO $?sintomas)
+      (member$ OPRESIONTORACICA $?sintomas)
+    )
+  )
+  =>
+  (insert$ $?diagnosticos 1 FUERTEANGUSTIA)
+  (delete-member$ $?diagnosticos NOSE)
+)
+
+; TODO Inferencia 41. Sobre prediagnosticos
+(defrule prediagnostico-ataquedepanico
+  (paciente_examen
+    (dni ?dni)
+    (sintomas $?sintomas)
+  )
+  (paciente_prediagnostico
+    (dni ?dni)
+    (diagnostico $?diagnosticos)
+  )
+  (test (not (subsetp (create$ ATAQUEDEPANICO) $?diagnosticos)))
+  (test
+    (and
+      (member$ ESTRES $?sintomas)
+      (member$ SUDORACION $?sintomas)
+    )
+  )
+  =>
+  (insert$ $?diagnosticos 1 ATAQUEDEPANICO)
+  (delete-member$ $?diagnosticos NOSE)
+)
+
+; inferencia 42 / 43
+(defrule prediagnostico-trastornoalimenticio
+  (paciente_examen
+    (dni ?dni)
+    (sintomas $?sintomas)
+  )
+  (paciente_prediagnostico
+    (dni ?dni)
+    (diagnostico $?diagnosticos)
+  )
+  (test (not (subsetp (create$ TRASTORNOSALIMENTICIOS) $?diagnosticos)))
+  (test
+    (or
+      (member$ ANOREXIA $?sintomas)
+      (member$ BULIMIA $?sintomas)
+    )
+  )
+  =>
+  (insert$ $?diagnosticos 1 TRASTORNOSALIMENTICIOS)
+  (delete-member$ $?diagnosticos NOSE)
+)
+
+; inferencia 44
+(defrule diagnostico-otras-patologias-1
+  (paciente_examen
+    (dni ?dni)
+    (sintomas $?sintomas)
+  )
+  (test
+    (member$ ADICCIONES $?sintomas)
+  )
+  =>
+  (assert
+    (paciente_diagnostico
+      (dni ?dni)
+      (diagnostico OTRASPATOLOGIAS)
+    )
+  )
+)
+
+; Inferencia 45
+(defrule prediagnostico-impulsividadsexual
+  (paciente_examen
+    (dni ?dni)
+    (sintomas $?sintomas)
+  )
+  (paciente_prediagnostico
+    (dni ?dni)
+    (diagnostico $?diagnosticos)
+  )
+  (test (not (subsetp (create$ IMPULSIVIDADSEXUAL) $?diagnosticos)))
+  (test
+    (or
+      (member$ IMPULSOSSEXUALESINTENSOS $?sintomas)
+      (member$ IMPULSOSSEXUALESRECURRENTES $?sintomas)
+    )
+  )
+  =>
+  (insert$ $?diagnosticos 1 IMPULSIVIDADSEXUAL)
+  (delete-member$ $?diagnosticos NOSE)
+)
+
+; Inferencia 46
+(defrule prediagnostico-trastornosexual
+  (paciente_examen
+    (dni ?dni)
+    (sintomas $?sintomas)
+  )
+  (paciente_prediagnostico
+    (dni ?dni)
+    (diagnostico $?diagnosticos)
+  )
+  (test (not (subsetp (create$ TRASTORNOSEXUAL) $?diagnosticos)))
+  (test
+    (and
+      (member$ FANTASIASSEXUALES $?sintomas)
+      (member$ PLACERSEXUALCONOBJETOSACTIVIDADESOSITUACIONESPOCOHABITUALES $?sintomas)
+    )
+  )
+  =>
+  (insert$ $?diagnosticos 1 TRASTORNOSEXUAL)
+  (delete-member$ $?diagnosticos NOSE)
+)
+
+; Inferencia 47
+(defrule prediagnostico-placeresasexuales
+  (paciente_examen
+    (dni ?dni)
+    (sintomas $?sintomas)
+  )
+  (paciente_prediagnostico
+    (dni ?dni)
+    (diagnostico $?diagnosticos)
+  )
+  (test (not (subsetp (create$ PLACERESASEXUALES) $?diagnosticos)))
+  (test
+    (or
+      (member$ PLACERSEXUALCONUNTALISMAN $?sintomas)
+      (member$ PLACERSEXUALCONORGANOSNOSEXUALES $?sintomas)
+    )
+  )
+  =>
+  (insert$ $?diagnosticos 1 PLACERESASEXUALES)
+  (delete-member$ $?diagnosticos NOSE)
+)
+
+; TODO Inferencia 48 mezcla
+;(defrule prediagnostico-fetichismo
+;  ()
+;  =>
+;
+;)
