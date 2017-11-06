@@ -252,6 +252,11 @@ public class PatientExamContentPane {
                 if (selected[index] && index >= 1) {
                     selected[0] = false;
                 }
+                if (selected[0]) {
+                    for (int i = 1; i < selected.length; i++) {
+                        selected[i] = false;
+                    }
+                }
             }
         }
     }

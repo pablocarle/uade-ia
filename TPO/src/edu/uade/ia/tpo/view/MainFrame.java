@@ -89,13 +89,22 @@ public class MainFrame {
     private void showDiagnostics(Patient patient, Exam exam, List<Diagnostic> diagnostics, JTextArea resultArea) {
         final StringBuilder results = new StringBuilder();
         final long executionTimeMs = clipsService.getLastExecutionTime();
+
         results.append("Evaluación de diagnostico en ").append(executionTimeMs).append("ms\n\n");
         results.append("Paciente: ");
         results.append(patient.getName()).append("\n");
-        diagnostics.forEach(diagnostic -> {
-            results.append("\t");
-            results.append("");
-        });
+        results.append("Examen: \n");
+        results.append(exam.toString());
+
+        if (diagnostics.isEmpty()) {
+            results.append("No hay suficiente información para determinar un diagnóstico\n");
+        } else {
+            diagnostics.forEach(diagnostic -> {
+                results.append("\t");
+                results.append("Diagnostico: ");
+                results.append(diagnostic.getResult());
+            });
+        }
         resultArea.setText(results.toString());
     }
 

@@ -21,6 +21,10 @@
       MASOQUISMO
     )
   )
+  (paciente_prediagnostico
+    (dni 1234567)
+    (diagnostico NOSE)
+  )
 
   (paciente
     (nombre "Pablo Carle")
@@ -43,6 +47,11 @@
         ESQUIZOFRENIA
     )
   )
+  (paciente_prediagnostico
+    (dni 33456432)
+    (diagnostico NOSE)
+  )
+
   (paciente
     (nombre "Caso antecedente neurosis")
     (dni 1232)
@@ -63,5 +72,9 @@
     (antecedente
       NEUROSIS
     )
+  )
+  (paciente_prediagnostico
+    (dni 1232)
+    (diagnostico NOSE)
   )
 )
