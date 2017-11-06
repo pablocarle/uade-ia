@@ -9,7 +9,6 @@
 	(slot aficiones (type STRING))
 	(slot gustos (type STRING))
 	(slot diagnostico (type SYMBOL) (default NOSE))
-	(slot prediagnostico (type SYMBOL) (default NOSE))
   (slot edad (type NUMBER) (range 0 120))
 )
 

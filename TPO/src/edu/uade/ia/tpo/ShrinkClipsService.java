@@ -17,6 +17,8 @@ public final class ShrinkClipsService {
 
     private final Environment clips;
 
+    private ThreadLocal<Long> lastExecutionTime;
+
     private ShrinkClipsService() {
         super();
         this.clips = new Environment();
@@ -38,6 +40,10 @@ public final class ShrinkClipsService {
         return instance;
     }
 
+    public long getLastExecutionTime() {
+        return lastExecutionTime.get();
+    }
+
     public void addPatient(Patient patient) {
         String assertion = "(assert (paciente " +
                 " (nombre " + "\"" + patient.getName() + "\")" +
@@ -53,6 +59,9 @@ public final class ShrinkClipsService {
                 "))";
         PrimitiveValue pv = clips.eval(assertion);
         System.out.println("Patient creation returned with: " + pv);
+        assertion = "(assert (paciente_prediagnostico (dni " + patient.getDni() + ") (diagnostico NOSE)))";
+        pv = clips.eval(assertion);
+        System.out.println("Patient empty exam creation returned with: " + pv);
     }
 
     public void addPatientExam(Patient patient, Exam exam) {
@@ -68,7 +77,8 @@ public final class ShrinkClipsService {
         clips.eval(assertion);
     }
 
-    public List<Diagnostic> runDiagnostic(final Patient patient) {
+    public List<Diagnostic> runDiagnostic(final Patient patient) throws Exception {
+        final long now = System.currentTimeMillis();
         final List<Diagnostic> list = new ArrayList<>();
 
         clips.run();
@@ -76,8 +86,15 @@ public final class ShrinkClipsService {
         final String diagnosticsFind = buildFindDiagnosticFacts(patient.getDni());
         PrimitiveValue pv = clips.eval(diagnosticsFind);
         if (pv instanceof MultifieldValue) {
-
+            MultifieldValue mv = (MultifieldValue) pv;
+            for (Object o : mv.multifieldValue()) {
+                FactAddressValue value = (FactAddressValue) o;
+                list.add(new Diagnostic(patient, value.getFactSlot("").toString())); //TODO
+            }
+        } else {
+            throw new Exception("Ocurrio un error al diagnosticar. Resultado: " + pv);
         }
+        lastExecutionTime.set(System.currentTimeMillis() - now);
         return list;
     }
 

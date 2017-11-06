@@ -87,10 +87,15 @@ public class MainFrame {
     }
 
     private void showDiagnostics(Patient patient, Exam exam, List<Diagnostic> diagnostics, JTextArea resultArea) {
-        StringBuilder results = new StringBuilder("Paciente: ");
+        final StringBuilder results = new StringBuilder();
+        final long executionTimeMs = clipsService.getLastExecutionTime();
+        results.append("Evaluación de diagnostico en ").append(executionTimeMs).append("ms\n\n");
+        results.append("Paciente: ");
         results.append(patient.getName()).append("\n");
-
-        diagnostics.forEach(diagnostic -> results.append("")); //TODO
+        diagnostics.forEach(diagnostic -> {
+            results.append("\t");
+            results.append("");
+        });
         resultArea.setText(results.toString());
     }
 

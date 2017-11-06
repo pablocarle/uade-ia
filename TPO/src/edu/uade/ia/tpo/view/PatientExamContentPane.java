@@ -209,7 +209,6 @@ public class PatientExamContentPane {
 
         @Override
         public Component getListCellRendererComponent(final JList<? extends Symptom> list, final Symptom value, final int index, final boolean isSelected, final boolean cellHasFocus) {
-            //System.out.println(MessageFormat.format("ListCellRenderer. value: {0}. index: {1}. isSelected: {2}. cellHasFocus: {3}", value, index, isSelected, cellHasFocus));
             final LayoutManager manager = new FlowLayout(FlowLayout.LEFT);
             final JPanel component = new JPanel(manager);
             final JLabel label = new JLabel(value.getPretty());
@@ -250,6 +249,9 @@ public class PatientExamContentPane {
             if (index >= 0) {
                 System.out.println("Modificar selected de indice " + index + " de " + selected[index] + " a " + !selected[index]);
                 selected[index] = !selected[index];
+                if (selected[index] && index >= 1) {
+                    selected[0] = false;
+                }
             }
         }
     }
