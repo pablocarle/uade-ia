@@ -8,6 +8,8 @@ import sun.swing.DefaultLookup;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ItemEvent;
+import java.text.MessageFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -103,6 +105,12 @@ public class PatientExamContentPane {
         perturbationSymptoms.setRenderer(perturbationSymptomsRenderer);
         desiresSymptoms.setRenderer(desiresSymptomsRenderer);
         behaviouralSymptoms.setRenderer(behaviouralSymptomsRenderer);
+
+        physicalSymptoms.addItemListener(event -> {
+            if (ItemEvent.SELECTED == event.getStateChange()) {
+                physicalSymptomsRenderer.setSelectedSymptom(physicalSymptoms.getSelectedIndex());
+            }
+        });
     }
 
     JPanel getView() {
@@ -167,6 +175,7 @@ public class PatientExamContentPane {
             super();
             this.symptoms = symptoms;
             this.selected = new boolean[symptoms.length];
+            this.selected[0] = true;
         }
 
         @Override
@@ -181,9 +190,6 @@ public class PatientExamContentPane {
             final Color fg = DefaultLookup.getColor(label, label.getUI(), "List.dropCellForeground");
 
             if (isSelected) {
-                if (index >= 0) {
-                    selected[index] = !selected[index];
-                }
                 label.setBackground(bg == null ? list.getSelectionBackground() : bg);
                 label.setForeground(fg == null ? list.getSelectionForeground() : fg);
             } else {
@@ -209,6 +215,13 @@ public class PatientExamContentPane {
                 }
             }
             return retList;
+        }
+
+        void setSelectedSymptom(int index) {
+            if (index >= 0) {
+                System.out.println("Modificar selected de indice " + index + " de " + selected[index] + " a " + !selected[index]);
+                selected[index] = !selected[index];
+            }
         }
     }
 }
