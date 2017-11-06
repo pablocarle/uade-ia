@@ -43,4 +43,25 @@
         ESQUIZOFRENIA
     )
   )
+  (paciente
+    (nombre "Caso antecedente neurosis")
+    (dni 1232)
+    (sexo MASCULINO)
+    (relacionFamiliar "")
+    (nivelEstudios UNIVERSITARIO)
+    (profesion "")
+    (trabajo "")
+    (aficiones "")
+    (gustos "")
+    (edad 12)
+  )
+  (paciente_examen
+    (dni 1232)
+    (sintomas
+      SINTOMASCOMPULSIVOS
+    )
+    (antecedente
+      NEUROSIS
+    )
+  )
 )

@@ -1,7 +1,13 @@
 (defrule prediagnostico-inestabilidad-emocional
-  (paciente
+  ?PACIENTE <- (paciente
     (dni ?dni)
-    
+    (diagnostico NOSE)
+    (prediagnostico NOSE)
+  )
+  (paciente_examen
+    (sintomas
+
+    )
   )
   =>
 

@@ -8,6 +8,8 @@
 	(slot trabajo (type STRING))
 	(slot aficiones (type STRING))
 	(slot gustos (type STRING))
+	(slot diagnostico (type SYMBOL) (default NOSE))
+	(slot prediagnostico (type SYMBOL) (default NOSE))
   (slot edad (type NUMBER) (range 0 120))
 )
 
@@ -122,10 +124,27 @@
 
 (deftemplate paciente_prediagnostico
   (slot dni (type NUMBER))
-  (slot diagnostico (type SYMBOL)) ; Un hecho por prediagnostico asignado
+  (multislot diagnostico
+		(allowed-values
+			NEUROSIS
+			PSICOSIS
+			PERVERSIONES
+			OTRASPATOLOGIAS
+		)
+	)
 )
 
-(deftemplate diagnostico
-	(slot dni (type NUMBER))
-	(slot asignacion (type STRING))
+(deftemplate paciente_diagnostico
+	(slot dni
+		(type NUMBER)
+	)
+	(slot diagnostico
+		(type SYMBOL)
+		(allowed-symbols
+			NEUROSIS
+			OTRASPATOLOGIAS
+			PERVERSION
+			PSICOSIS
+		)
+	)
 )
