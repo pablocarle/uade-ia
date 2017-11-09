@@ -1,9 +1,9 @@
-(defrule prediagnostico-inestabilidad-emocional
+(defrule presuncion-inestabilidad-emocional
   (paciente_examen
     (dni ?dni)
     (sintomas $?sintomas)
   )
-  (paciente_prediagnostico
+  (paciente_presuncion
     (dni ?dni)
     (diagnostico $?diagnosticos)
   )
@@ -20,12 +20,12 @@
   (delete-member$ $?diagnosticos NOSE)
 )
 
-(defrule prediagnostico-histeria
+(defrule presuncion-histeria
   (paciente_examen
     (dni ?dni)
     (sintomas $?sintomas)
   )
-  (paciente_prediagnostico
+  (paciente_presuncion
     (dni ?dni)
     (diagnostico $?diagnosticos)
   )
@@ -41,12 +41,12 @@
   (delete-member$ $?diagnosticos NOSE)
 )
 
-(defrule prediagnostico-impulsivo
+(defrule presuncion-impulsivo
   (paciente_examen
     (dni ?dni)
     (sintomas $?sintomas)
   )
-  (paciente_prediagnostico
+  (paciente_presuncion
     (dni ?dni)
     (diagnostico $?diagnosticos)
   )
@@ -62,12 +62,12 @@
   (delete-member$ $?diagnosticos NOSE)
 )
 
-(defrule prediagnostico-obsesivo
+(defrule presuncion-obsesivo
   (paciente_examen
     (dni ?dni)
     (sintomas $?sintomas)
   )
-  (paciente_prediagnostico
+  (paciente_presuncion
     (dni ?dni)
     (diagnostico $?diagnosticos)
   )
@@ -83,19 +83,19 @@
   (delete-member$ $?diagnosticos NOSE)
 )
 
-; TODO Regla 25. Verificar contra los prediagnosticos
-;(defrule prediagnostico-neurosisobsesiva
+; TODO Regla 25. Verificar contra los presuncions
+;(defrule presuncion-neurosisobsesiva
 ;  ()
 ;  =>
 ;
 ;)
 
-(defrule prediagnostico-persecusion
+(defrule presuncion-persecusion
   (paciente_examen
     (dni ?dni)
     (sintomas $?sintomas)
   )
-  (paciente_prediagnostico
+  (paciente_presuncion
     (dni ?dni)
     (diagnostico $?diagnosticos)
   )
@@ -111,19 +111,19 @@
   (delete-member$ $?diagnosticos NOSE)
 )
 
-; TODO Regla 27. Verificar contra los prediagnosticos
-;(defrule prediagnostico-fobia
+; TODO Regla 27. Verificar contra los presuncions
+;(defrule presuncion-fobia
 ;  ()
 ;  =>
 ;
 ;)
 
-(defrule prediagnostico-percepcionalterada
+(defrule presuncion-percepcionalterada
   (paciente_examen
     (dni ?dni)
     (sintomas $?sintomas)
   )
-  (paciente_prediagnostico
+  (paciente_presuncion
     (dni ?dni)
     (diagnostico $?diagnosticos)
   )
@@ -139,12 +139,12 @@
   (delete-member$ $?diagnosticos NOSE)
 )
 
-(defrule prediagnostico-ausenciaemocional
+(defrule presuncion-ausenciaemocional
   (paciente_examen
     (dni ?dni)
     (sintomas $?sintomas)
   )
-  (paciente_prediagnostico
+  (paciente_presuncion
     (dni ?dni)
     (diagnostico $?diagnosticos)
   )
@@ -160,13 +160,13 @@
   (delete-member$ $?diagnosticos NOSE)
 )
 
-; TODO Regla 30, mezcla entre sintoma y prediagnostico
-(defrule prediagnostico-esquizofrenia
+; TODO Regla 30, mezcla entre sintoma y presuncion
+(defrule presuncion-esquizofrenia
   (paciente_examen
     (dni ?dni)
     (sintomas $?sintomas)
   )
-  (paciente_prediagnostico
+  (paciente_presuncion
     (dni ?dni)
     (diagnostico $?diagnosticos)
   )
@@ -182,12 +182,12 @@
   (delete-member$ $?diagnosticos NOSE)
 )
 
-(defrule prediagnostico-paranoia
+(defrule presuncion-paranoia
   (paciente_examen
     (dni ?dni)
     (sintomas $?sintomas)
   )
-  (paciente_prediagnostico
+  (paciente_presuncion
     (dni ?dni)
     (diagnostico $?diagnosticos)
   )
@@ -205,12 +205,12 @@
 )
 
 ; inferencia 32
-(defrule prediagnostico-animodepresivo
+(defrule presuncion-animodepresivo
   (paciente_examen
     (dni ?dni)
     (sintomas $?sintomas)
   )
-  (paciente_prediagnostico
+  (paciente_presuncion
     (dni ?dni)
     (diagnostico $?diagnosticos)
   )
@@ -227,12 +227,12 @@
 )
 
 ; inferencia 33
-(defrule prediagnostico-desmotivacion
+(defrule presuncion-desmotivacion
   (paciente_examen
     (dni ?dni)
     (sintomas $?sintomas)
   )
-  (paciente_prediagnostico
+  (paciente_presuncion
     (dni ?dni)
     (diagnostico $?diagnosticos)
   )
@@ -249,12 +249,12 @@
 )
 
 ; inferencia 34
-(defrule prediagnostico-desgano
+(defrule presuncion-desgano
   (paciente_examen
     (dni ?dni)
     (sintomas $?sintomas)
   )
-  (paciente_prediagnostico
+  (paciente_presuncion
     (dni ?dni)
     (diagnostico $?diagnosticos)
   )
@@ -271,12 +271,12 @@
 )
 
 ; inferencia 35
-(defrule prediagnostico-tendenciasuicida
+(defrule presuncion-tendenciasuicida
   (paciente_examen
     (dni ?dni)
     (sintomas $?sintomas)
   )
-  (paciente_prediagnostico
+  (paciente_presuncion
     (dni ?dni)
     (diagnostico $?diagnosticos)
   )
@@ -293,12 +293,12 @@
 )
 
 ; inferencia 36
-(defrule prediagnostico-hiperactividad
+(defrule presuncion-hiperactividad
   (paciente_examen
     (dni ?dni)
     (sintomas $?sintomas)
   )
-  (paciente_prediagnostico
+  (paciente_presuncion
     (dni ?dni)
     (diagnostico $?diagnosticos)
   )
@@ -315,12 +315,12 @@
 )
 
 ; inferencia 37
-(defrule prediagnostico-aceleramiento
+(defrule presuncion-aceleramiento
   (paciente_examen
     (dni ?dni)
     (sintomas $?sintomas)
   )
-  (paciente_prediagnostico
+  (paciente_presuncion
     (dni ?dni)
     (diagnostico $?diagnosticos)
   )
@@ -337,19 +337,19 @@
 )
 
 ; TODO Inferencia 38 mezcla
-;(defrule prediagnostico-psicosismaniacodepresiva
+;(defrule presuncion-psicosismaniacodepresiva
 ;  ()
 ;  =>
 ;
 ;)
 
 ; Inferencia 39
-(defrule prediagnostico-estrestemporal
+(defrule presuncion-estrestemporal
   (paciente_examen
     (dni ?dni)
     (sintomas $?sintomas)
   )
-  (paciente_prediagnostico
+  (paciente_presuncion
     (dni ?dni)
     (diagnostico $?diagnosticos)
   )
@@ -366,12 +366,12 @@
 )
 
 ; Inferencia 40
-(defrule prediagnostico-fuerteangustia
+(defrule presuncion-fuerteangustia
   (paciente_examen
     (dni ?dni)
     (sintomas $?sintomas)
   )
-  (paciente_prediagnostico
+  (paciente_presuncion
     (dni ?dni)
     (diagnostico $?diagnosticos)
   )
@@ -389,13 +389,13 @@
   (delete-member$ $?diagnosticos NOSE)
 )
 
-; TODO Inferencia 41. Sobre prediagnosticos
-(defrule prediagnostico-ataquedepanico
+; TODO Inferencia 41. Sobre presuncions
+(defrule presuncion-ataquedepanico
   (paciente_examen
     (dni ?dni)
     (sintomas $?sintomas)
   )
-  (paciente_prediagnostico
+  (paciente_presuncion
     (dni ?dni)
     (diagnostico $?diagnosticos)
   )
@@ -412,12 +412,12 @@
 )
 
 ; inferencia 42 / 43
-(defrule prediagnostico-trastornoalimenticio
+(defrule presuncion-trastornoalimenticio
   (paciente_examen
     (dni ?dni)
     (sintomas $?sintomas)
   )
-  (paciente_prediagnostico
+  (paciente_presuncion
     (dni ?dni)
     (diagnostico $?diagnosticos)
   )
@@ -452,12 +452,12 @@
 )
 
 ; Inferencia 45
-(defrule prediagnostico-impulsividadsexual
+(defrule presuncion-impulsividadsexual
   (paciente_examen
     (dni ?dni)
     (sintomas $?sintomas)
   )
-  (paciente_prediagnostico
+  (paciente_presuncion
     (dni ?dni)
     (diagnostico $?diagnosticos)
   )
@@ -474,12 +474,12 @@
 )
 
 ; Inferencia 46
-(defrule prediagnostico-trastornosexual
+(defrule presuncion-trastornosexual
   (paciente_examen
     (dni ?dni)
     (sintomas $?sintomas)
   )
-  (paciente_prediagnostico
+  (paciente_presuncion
     (dni ?dni)
     (diagnostico $?diagnosticos)
   )
@@ -496,12 +496,12 @@
 )
 
 ; Inferencia 47
-(defrule prediagnostico-placeresasexuales
+(defrule presuncion-placeresasexuales
   (paciente_examen
     (dni ?dni)
     (sintomas $?sintomas)
   )
-  (paciente_prediagnostico
+  (paciente_presuncion
     (dni ?dni)
     (diagnostico $?diagnosticos)
   )
@@ -518,7 +518,7 @@
 )
 
 ; TODO Inferencia 48 mezcla
-;(defrule prediagnostico-fetichismo
+;(defrule presuncion-fetichismo
 ;  ()
 ;  =>
 ;

@@ -59,7 +59,7 @@ public final class ShrinkClipsService {
                 "))";
         PrimitiveValue pv = clips.eval(assertion);
         System.out.println("Patient creation returned with: " + pv);
-        assertion = "(assert (paciente_prediagnostico (dni " + patient.getDni() + ") (diagnostico NOSE)))";
+        assertion = "(assert (paciente_presuncion (dni " + patient.getDni() + ") (diagnostico NOSE)))";
         pv = clips.eval(assertion);
         System.out.println("Patient empty exam creation returned with: " + pv);
     }

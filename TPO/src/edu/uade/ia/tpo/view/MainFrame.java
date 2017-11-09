@@ -101,7 +101,6 @@ public class MainFrame {
             results.append("No hay suficiente información para determinar un diagnóstico\n");
         } else {
             diagnostics.forEach(diagnostic -> {
-                results.append("\t");
                 results.append("Diagnostico: ");
                 results.append(diagnostic.getResult());
             });
