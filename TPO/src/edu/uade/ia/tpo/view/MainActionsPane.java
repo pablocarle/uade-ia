@@ -6,6 +6,7 @@ public class MainActionsPane {
     private JButton nuevoPacienteButton;
     private JButton evaluarPacienteButton;
     private JPanel view;
+    private JButton registroDeActividadesButton;
 
     public MainActionsPane() {
         super();
