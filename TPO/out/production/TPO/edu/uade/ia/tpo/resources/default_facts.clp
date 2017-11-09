@@ -21,7 +21,7 @@
       MASOQUISMO
     )
   )
-  (paciente_prediagnostico
+  (paciente_presuncion
     (dni 1234567)
     (diagnostico NOSE)
   )
@@ -47,7 +47,7 @@
         ESQUIZOFRENIA
     )
   )
-  (paciente_prediagnostico
+  (paciente_presuncion
     (dni 33456432)
     (diagnostico NOSE)
   )
@@ -73,7 +73,7 @@
       NEUROSIS
     )
   )
-  (paciente_prediagnostico
+  (paciente_presuncion
     (dni 1232)
     (diagnostico NOSE)
   )

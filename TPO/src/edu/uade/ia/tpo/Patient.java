@@ -88,4 +88,36 @@ public class Patient {
     public Integer getAge() {
         return age;
     }
+
+    public String toCsv() {
+        return dni + "," +
+                age + "," +
+                personalTastes.replaceAll(",", "#") + "," +
+                hobbies.replaceAll(",", "#") + "," +
+                work.replaceAll(",", "#") + "," +
+                profession.replaceAll(",", "#") + "," +
+                scholarshipLevel.name() + "," +
+                sex.name() + "," +
+                name.replaceAll(",", "#") + "," +
+                familyRelation.replaceAll(",", "#");
+    }
+
+    public static Patient fromCsv(final String csv) {
+        String[] tokens = csv.split(",");
+        if (tokens.length != 10) {
+            throw new RuntimeException("Formato incorrecto para csv de paciente " + csv);
+        }
+        return new Patient(
+                tokens[8],
+                Long.valueOf(tokens[0]),
+                Sexo.valueOf(tokens[7]),
+                tokens[9],
+                ScholarshipLevel.valueOf(tokens[6]),
+                tokens[5],
+                tokens[4],
+                tokens[3],
+                tokens[2],
+                Integer.valueOf(tokens[1])
+        );
+    }
 }

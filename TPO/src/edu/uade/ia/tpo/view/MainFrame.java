@@ -8,9 +8,18 @@ import edu.uade.ia.tpo.ShrinkClipsService;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
+import java.awt.event.WindowEvent;
+import java.awt.event.WindowListener;
+import java.io.IOException;
+import java.net.URI;
+import java.net.URISyntaxException;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.text.MessageFormat;
+import java.text.SimpleDateFormat;
+import java.util.*;
 import java.util.List;
-import java.util.Optional;
+import java.util.stream.Collectors;
 
 /**
  * Application entry point
@@ -33,12 +42,38 @@ public class MainFrame {
 
     private Patient selectedPatientForDiagnose;
 
-    public MainFrame() {
+    private StringBuilder log;
+    private List<String> patients;
+
+    public MainFrame() throws IOException, URISyntaxException {
         super();
         clipsService = ShrinkClipsService.get();
         initialize();
 
         initializeEvents();
+
+        initializeLog();
+
+        initializeSavedPatients();
+    }
+
+    private void initializeLog() {
+        this.log = new StringBuilder();
+        try {
+            log.append(Files.readAllLines(Paths.get(new URI("psico.log"))).stream().collect(Collectors.joining("\n")));
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    private void initializeSavedPatients() {
+        try {
+            this.patients = Files.readAllLines(Paths.get(new URI("patients.csv")));
+            this.patients.forEach(csvPatient -> clipsService.addPatient(Patient.fromCsv(csvPatient)));
+        } catch (Exception e) {
+            e.printStackTrace();
+            this.patients = new ArrayList<>();
+        }
     }
 
     private void initializeEvents() {
@@ -71,11 +106,53 @@ public class MainFrame {
 
         activityLog.getVolverButton()
                 .addActionListener(this::returnToMain);
+
+        frame.addWindowListener(new WindowListener() {
+            @Override
+            public void windowOpened(WindowEvent e) {
+
+            }
+
+            @Override
+            public void windowClosing(WindowEvent e) {
+                closeFiles();
+            }
+
+            @Override
+            public void windowClosed(WindowEvent e) {
+                closeFiles();
+            }
+
+            @Override
+            public void windowIconified(WindowEvent e) {
+
+            }
+
+            @Override
+            public void windowDeiconified(WindowEvent e) {
+
+            }
+
+            @Override
+            public void windowActivated(WindowEvent e) {
+
+            }
+
+            @Override
+            public void windowDeactivated(WindowEvent e) {
+
+            }
+        });
     }
 
     private void showActivityLog(ActionEvent event) {
         frame.setVisible(false);
         frame.setContentPane(activityLog.getView());
+        if (log.length() == 0) {
+            activityLog.getActivityLog().setText("No hay log");
+        } else {
+            activityLog.getActivityLog().setText(log.toString());
+        }
         frame.setVisible(true);
     }
 
@@ -102,6 +179,8 @@ public class MainFrame {
         final StringBuilder results = new StringBuilder();
         final long executionTimeMs = clipsService.getLastExecutionTime();
 
+        results.append(new SimpleDateFormat("yyyy-MM-dd hh:mm:ss").format(new Date()));
+        results.append("\n\n");
         results.append("Evaluación de diagnostico en ").append(executionTimeMs).append("ms\n\n");
         results.append("Paciente: ");
         results.append(patient.getName()).append("\n");
@@ -117,6 +196,7 @@ public class MainFrame {
                 results.append(diagnostic.getResult());
             });
         }
+        addToActivityLog(results.toString());
         resultArea.setText(results.toString());
     }
 
@@ -162,12 +242,14 @@ public class MainFrame {
     private void validateAndCreatePatient(ActionEvent event) {
         if (patientData.isValidForm()) {
             try {
-                clipsService.addPatient(patientData.buildPatient());
+                Patient patient = patientData.buildPatient();
+                clipsService.addPatient(patient);
                 JOptionPane.showMessageDialog(null, "Paciente creado exitosamente");
                 frame.setVisible(false);
                 frame.setBounds(DEFAULT_BOUNDS);
                 frame.setContentPane(actionsPane.getView());
                 frame.setVisible(true);
+                addToSavedPatients(patient);
             } catch (Exception e) {
                 e.printStackTrace();
                 JOptionPane.showMessageDialog(null, "Ocurrio un error creando el paciente. [" + e.getMessage() + "]");
@@ -221,5 +303,29 @@ public class MainFrame {
                 e.printStackTrace();
             }
         });
+    }
+
+    private void closeFiles() {
+        try {
+            Files.write(Paths.get(new URI("psico.log")), Arrays.stream(log.toString().split("\n")).collect(Collectors.toList()));
+        } catch (IOException | URISyntaxException e) {
+            e.printStackTrace();
+        }
+
+    }
+
+    private void addToActivityLog(final String diagnostic) {
+        log.append("\n");
+        log.append("===========================================");
+        log.append("\n\n");
+        log.append(diagnostic);
+        log.append("\n\n");
+        log.append("===========================================");
+    }
+
+    private void addToSavedPatients(final Patient patient) {
+        patients.add(
+            patient.toCsv()
+        );
     }
 }
