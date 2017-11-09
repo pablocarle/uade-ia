@@ -3,7 +3,7 @@
     (dni ?dni)
     (antecedente NEUROSIS)
   )
-  (paciente_prediagnostico
+  (paciente_presuncion
     (dni ?dni)
     (diagnostico $?diagnosticos)
   )
@@ -11,7 +11,7 @@
   =>
   (insert$ $?diagnosticos 1 NEUROSIS)
   (delete-member$ $?diagnosticos NOSE)
-  (printout t "Insertado prediagnostico NEUROSIS" crlf)
+  (printout t "Insertado presuncion NEUROSIS" crlf)
 )
 
 (defrule antecedente-psicosis
@@ -19,7 +19,7 @@
     (dni ?dni)
     (antecedente PSICOSIS)
   )
-  (paciente_prediagnostico
+  (paciente_presuncion
     (dni ?dni)
     (diagnostico $?diagnosticos)
   )
@@ -27,7 +27,7 @@
   =>
   (insert$ $?diagnosticos 1 PSICOSIS)
   (delete-member$ $?diagnosticos NOSE)
-  (printout t "Insertado prediagnostico PSICOSIS" crlf)
+  (printout t "Insertado presuncion PSICOSIS" crlf)
 )
 
 (defrule antecedente-perversiones
@@ -35,7 +35,7 @@
     (dni ?dni)
     (antecedente PERVERSIONES)
   )
-  (paciente_prediagnostico
+  (paciente_presuncion
     (dni ?dni)
     (diagnostico $?diagnosticos)
   )
@@ -43,7 +43,7 @@
   =>
   (insert$ $?diagnosticos 1 PERVERSIONES)
   (delete-member$ $?diagnosticos NOSE)
-  (printout t "Insertado prediagnostico PERVERSIONES" crlf)
+  (printout t "Insertado presuncion PERVERSIONES" crlf)
 )
 
 (defrule antecedente-otraspatologias
@@ -51,7 +51,7 @@
     (dni ?dni)
     (antecedente OTRASPATOLOGIAS)
   )
-  (paciente_prediagnostico
+  (paciente_presuncion
     (dni ?dni)
     (diagnostico $?diagnosticos)
   )
@@ -59,7 +59,7 @@
   =>
   (insert$ $?diagnosticos 1 OTRASPATOLOGIAS)
   (delete-member$ $?diagnosticos NOSE)
-  (printout t "Insertado prediagnostico OTRASPATOLOGIAS" crlf)
+  (printout t "Insertado presuncion OTRASPATOLOGIAS" crlf)
 )
 
 (defrule antecedente-histerias
@@ -67,7 +67,7 @@
     (dni ?dni)
     (antecedente HISTERIAS)
   )
-  (paciente_prediagnostico
+  (paciente_presuncion
     (dni ?dni)
     (diagnostico $?diagnosticos)
   )
@@ -75,7 +75,7 @@
   =>
   (insert$ $?diagnosticos 1 NEUROSIS)
   (delete-member$ $?diagnosticos NOSE)
-  (printout t "Insertado prediagnostico Histerias-NEUROSIS" crlf)
+  (printout t "Insertado presuncion Histerias-NEUROSIS" crlf)
 )
 
 (defrule antecedente-neurosisobsesiva
@@ -83,7 +83,7 @@
     (dni ?dni)
     (antecedente NEUROSISOBSESIVA)
   )
-  (paciente_prediagnostico
+  (paciente_presuncion
     (dni ?dni)
     (diagnostico $?diagnosticos)
   )
@@ -91,7 +91,7 @@
   =>
   (insert$ $?diagnosticos 1 NEUROSIS)
   (delete-member$ $?diagnosticos NOSE)
-  (printout t "Insertado prediagnostico NeurosisObsevisa-NEUROSIS" crlf)
+  (printout t "Insertado presuncion NeurosisObsevisa-NEUROSIS" crlf)
 )
 
 (defrule antecedente-fobias
@@ -99,7 +99,7 @@
     (dni ?dni)
     (antecedente FOBIAS)
   )
-  (paciente_prediagnostico
+  (paciente_presuncion
     (dni ?dni)
     (diagnostico $?diagnosticos)
   )
@@ -107,7 +107,7 @@
   =>
   (insert$ $?diagnosticos 1 NEUROSIS)
   (delete-member$ $?diagnosticos NOSE)
-  (printout t "Insertado prediagnostico Fobias-NEUROSIS" crlf)
+  (printout t "Insertado presuncion Fobias-NEUROSIS" crlf)
 )
 
 (defrule antecedente-paranoias
@@ -115,7 +115,7 @@
     (dni ?dni)
     (antecedente PARANOIAS)
   )
-  (paciente_prediagnostico
+  (paciente_presuncion
     (dni ?dni)
     (diagnostico $?diagnosticos)
   )
@@ -123,7 +123,7 @@
   =>
   (insert$ $?diagnosticos 1 PSICOSIS)
   (delete-member$ $?diagnosticos NOSE)
-  (printout t "Insertado prediagnostico Paranoias-PSICOSIS" crlf)
+  (printout t "Insertado presuncion Paranoias-PSICOSIS" crlf)
 )
 
 (defrule antecedente-esquizofrenia
@@ -131,7 +131,7 @@
     (dni ?dni)
     (antecedente ESQUIZOFRENIA)
   )
-  (paciente_prediagnostico
+  (paciente_presuncion
     (dni ?dni)
     (diagnostico $?diagnosticos)
   )
@@ -139,7 +139,7 @@
   =>
   (insert$ $?diagnosticos 1 PSICOSIS)
   (delete-member$ $?diagnosticos NOSE)
-  (printout t "Insertado prediagnostico Esquizofrenia-PSICOSIS" crlf)
+  (printout t "Insertado presuncion Esquizofrenia-PSICOSIS" crlf)
 )
 
 (defrule antecedente-parafrenia
@@ -147,7 +147,7 @@
     (dni ?dni)
     (antecedente PARAFRENIA)
   )
-  (paciente_prediagnostico
+  (paciente_presuncion
     (dni ?dni)
     (diagnostico $?diagnosticos)
   )
@@ -155,7 +155,7 @@
   =>
   (insert$ $?diagnosticos 1 PSICOSIS)
   (delete-member$ $?diagnosticos NOSE)
-  (printout t "Insertado prediagnostico Parafrenia-PSICOSIS" crlf)
+  (printout t "Insertado presuncion Parafrenia-PSICOSIS" crlf)
 )
 
 (defrule antecedente-psicosismaniacodepresiva
@@ -163,7 +163,7 @@
     (dni ?dni)
     (antecedente PSICOSISMANIACODEPRESIVA)
   )
-  (paciente_prediagnostico
+  (paciente_presuncion
     (dni ?dni)
     (diagnostico $?diagnosticos)
   )
@@ -171,7 +171,7 @@
   =>
   (insert$ $?diagnosticos 1 PSICOSIS)
   (delete-member$ $?diagnosticos NOSE)
-  (printout t "Insertado prediagnostico PsicosisManiacoDepresiva-PSICOSIS" crlf)
+  (printout t "Insertado presuncion PsicosisManiacoDepresiva-PSICOSIS" crlf)
 )
 
 (defrule antecedente-melancolia
@@ -179,7 +179,7 @@
     (dni ?dni)
     (antecedente MELANCOLIA)
   )
-  (paciente_prediagnostico
+  (paciente_presuncion
     (dni ?dni)
     (diagnostico $?diagnosticos)
   )
@@ -187,7 +187,7 @@
   =>
   (insert$ $?diagnosticos 1 PSICOSIS)
   (delete-member$ $?diagnosticos NOSE)
-  (printout t "Insertado prediagnostico Melancolia-PSICOSIS" crlf)
+  (printout t "Insertado presuncion Melancolia-PSICOSIS" crlf)
 )
 
 (defrule antecedente-fetichismo
@@ -195,7 +195,7 @@
     (dni ?dni)
     (antecedente FETICHISMO)
   )
-  (paciente_prediagnostico
+  (paciente_presuncion
     (dni ?dni)
     (diagnostico $?diagnosticos)
   )
@@ -203,7 +203,7 @@
   =>
   (insert$ $?diagnosticos 1 PERVERSIONES)
   (delete-member$ $?diagnosticos NOSE)
-  (printout t "Insertado prediagnostico Fetichismo-PERVERSIONES" crlf)
+  (printout t "Insertado presuncion Fetichismo-PERVERSIONES" crlf)
 )
 
 (defrule antecedente-sadismo
@@ -211,7 +211,7 @@
     (dni ?dni)
     (antecedente SADISMO)
   )
-  (paciente_prediagnostico
+  (paciente_presuncion
     (dni ?dni)
     (diagnostico $?diagnosticos)
   )
@@ -219,7 +219,7 @@
   =>
   (insert$ $?diagnosticos 1 PERVERSIONES)
   (delete-member$ $?diagnosticos NOSE)
-  (printout t "Insertado prediagnostico Sadismo-PERVERSIONES" crlf)
+  (printout t "Insertado presuncion Sadismo-PERVERSIONES" crlf)
 )
 
 (defrule antecedente-masoquismo
@@ -227,7 +227,7 @@
     (dni ?dni)
     (antecedente MASOQUISMO)
   )
-  (paciente_prediagnostico
+  (paciente_presuncion
     (dni ?dni)
     (diagnostico $?diagnosticos)
   )
@@ -235,7 +235,7 @@
   =>
   (insert$ $?diagnosticos 1 PERVERSIONES)
   (delete-member$ $?diagnosticos NOSE)
-  (printout t "Insertado prediagnostico Masoquismo-PERVERSIONES" crlf)
+  (printout t "Insertado presuncion Masoquismo-PERVERSIONES" crlf)
 )
 
 (defrule antecedente-voyeurismo
@@ -243,7 +243,7 @@
     (dni ?dni)
     (antecedente VOYEURISMO)
   )
-  (paciente_prediagnostico
+  (paciente_presuncion
     (dni ?dni)
     (diagnostico $?diagnosticos)
   )
@@ -251,7 +251,7 @@
   =>
   (insert$ $?diagnosticos 1 PERVERSIONES)
   (delete-member$ $?diagnosticos NOSE)
-  (printout t "Insertado prediagnostico Voyeurismo-PERVERSIONES" crlf)
+  (printout t "Insertado presuncion Voyeurismo-PERVERSIONES" crlf)
 )
 
 (defrule antecedente-exhibicionismo
@@ -259,7 +259,7 @@
     (dni ?dni)
     (antecedente EXHIBICIONISMO)
   )
-  (paciente_prediagnostico
+  (paciente_presuncion
     (dni ?dni)
     (diagnostico $?diagnosticos)
   )
@@ -267,7 +267,7 @@
   =>
   (insert$ $?diagnosticos 1 PERVERSIONES)
   (delete-member$ $?diagnosticos NOSE)
-  (printout t "Insertado prediagnostico Exhibicionismo-PERVERSIONES" crlf)
+  (printout t "Insertado presuncion Exhibicionismo-PERVERSIONES" crlf)
 )
 
 (defrule antecedente-adicciones
@@ -275,7 +275,7 @@
     (dni ?dni)
     (antecedente ADICCIONES)
   )
-  (paciente_prediagnostico
+  (paciente_presuncion
     (dni ?dni)
     (diagnostico $?diagnosticos)
   )
@@ -283,7 +283,7 @@
   =>
   (insert$ $?diagnosticos 1 OTRASPATOLOGIAS)
   (delete-member$ $?diagnosticos NOSE)
-  (printout t "Insertado prediagnostico Adicciones-OTRASPATOLOGIAS" crlf)
+  (printout t "Insertado presuncion Adicciones-OTRASPATOLOGIAS" crlf)
 )
 
 (defrule antecedente-trastornosalimenticios
@@ -291,7 +291,7 @@
     (dni ?dni)
     (antecedente TRASTORNOSALIMENTICIOS)
   )
-  (paciente_prediagnostico
+  (paciente_presuncion
     (dni ?dni)
     (diagnostico $?diagnosticos)
   )
@@ -299,7 +299,7 @@
   =>
   (insert$ $?diagnosticos 1 OTRASPATOLOGIAS)
   (delete-member$ $?diagnosticos NOSE)
-  (printout t "Insertado prediagnostico TrastornosAlimenticios-OTRASPATOLOGIAS" crlf)
+  (printout t "Insertado presuncion TrastornosAlimenticios-OTRASPATOLOGIAS" crlf)
 )
 
 (defrule antecedente-trastornosansiedad
@@ -307,7 +307,7 @@
     (dni ?dni)
     (antecedente TRASTORNOSDEANSIEDAD)
   )
-  (paciente_prediagnostico
+  (paciente_presuncion
     (dni ?dni)
     (diagnostico $?diagnosticos)
   )
@@ -315,5 +315,5 @@
   =>
   (insert$ $?diagnosticos 1 OTRASPATOLOGIAS)
   (delete-member$ $?diagnosticos NOSE)
-  (printout t "Insertado prediagnostico TrastornosAnsiedad-OTRASPATOLOGIAS" crlf)
+  (printout t "Insertado presuncion TrastornosAnsiedad-OTRASPATOLOGIAS" crlf)
 )

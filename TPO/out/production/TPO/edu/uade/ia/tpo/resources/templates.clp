@@ -1,3 +1,5 @@
+; TODO Instructivo de instalacion / ejecucion.
+
 (deftemplate paciente
 	(slot nombre (type STRING))
 	(slot dni (type NUMBER))
@@ -121,7 +123,7 @@
   )
 )
 
-(deftemplate paciente_prediagnostico
+(deftemplate paciente_presuncion
   (slot dni (type NUMBER))
   (multislot diagnostico
 		(allowed-values

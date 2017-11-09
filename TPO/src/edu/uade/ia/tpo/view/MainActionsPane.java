@@ -20,6 +20,10 @@ public class MainActionsPane {
         return evaluarPacienteButton;
     }
 
+    public JButton getRegistroDeActividadesButton() {
+        return registroDeActividadesButton;
+    }
+
     public JPanel getView() {
         return view;
     }

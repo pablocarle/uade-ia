@@ -29,6 +29,7 @@ public class MainFrame {
     private PatientDataContentPane patientData;
 
     private PatientExamContentPane patientExam;
+    private ActivityLogContentPane activityLog;
 
     private Patient selectedPatientForDiagnose;
 
@@ -46,6 +47,9 @@ public class MainFrame {
 
         actionsPane.getEvaluarPacienteButton()
                 .addActionListener(this::listPatientsForEvaluation);
+
+        actionsPane.getRegistroDeActividadesButton()
+                .addActionListener(this::showActivityLog);
 
         patientData.getCancelarButton()
                 .addActionListener(this::returnToMain);
@@ -65,6 +69,14 @@ public class MainFrame {
         patientExam.getEvaluarButton()
                 .addActionListener(this::diagnosePatient);
 
+        activityLog.getVolverButton()
+                .addActionListener(this::returnToMain);
+    }
+
+    private void showActivityLog(ActionEvent event) {
+        frame.setVisible(false);
+        frame.setContentPane(activityLog.getView());
+        frame.setVisible(true);
     }
 
     /**
@@ -189,6 +201,7 @@ public class MainFrame {
         patientData = new PatientDataContentPane();
         patientList = new PatientListContentPane();
         patientExam = new PatientExamContentPane();
+        activityLog = new ActivityLogContentPane();
 
         frame.setContentPane(actionsPane.getView());
     }
