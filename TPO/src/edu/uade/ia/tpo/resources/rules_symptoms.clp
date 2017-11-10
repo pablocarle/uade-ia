@@ -559,6 +559,10 @@
     (dni ?dni)
     (diagnostico $?diagnosticos)
   )
+  ?PACIENTE <- (paciente
+    (dni ?dni)
+    (diagnostico NOSE)
+  )
   (test
     (or
       (member$ HISTERIA $?diagnosticos)
@@ -573,6 +577,9 @@
       (diagnostico NEUROSIS)
     )
   )
+  (modify ?PACIENTE
+    (diagnostico ASIGNADO)
+  )
 )
 
 ; Inferencia 54 / 55 / 56
@@ -580,6 +587,10 @@
   (paciente_presuncion
     (dni ?dni)
     (diagnostico $?diagnosticos)
+  )
+  ?PACIENTE <- (paciente
+    (dni ?dni)
+    (diagnostico NOSE)
   )
   (test
     (or
@@ -594,6 +605,9 @@
       (dni ?dni)
       (diagnostico PSICOSIS)
     )
+  )
+  (modify ?PACIENTE
+    (diagnostico ASIGNADO)
   )
 )
 
@@ -603,6 +617,10 @@
     (dni ?dni)
     (diagnostico $?diagnosticos)
   )
+  ?PACIENTE <- (paciente
+    (dni ?dni)
+    (diagnostico NOSE)
+  )
   (test
     (or
       (member$ ESQUIZOFRENIA $?diagnosticos)
@@ -617,7 +635,11 @@
       (diagnostico PSICOSIS)
     )
   )
+  (modify ?PACIENTE
+    (diagnostico ASIGNADO)
+  )
 )
+
 
 
 ; Inferencia 71 / 72 / 73 / 74 / 75
