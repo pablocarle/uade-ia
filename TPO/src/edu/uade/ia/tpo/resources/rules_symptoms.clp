@@ -83,12 +83,28 @@
   (delete-member$ $?diagnosticos NOSE)
 )
 
-; TODO Regla 25. Verificar contra los presuncions
-;(defrule presuncion-neurosisobsesiva
-;  ()
-;  =>
-;
-;)
+; Inferencia 25
+(defrule presuncion-neurosisobsesiva
+  (paciente_examen
+    (dni ?dni)
+    (sintomas $?sintomas)
+  )
+  (paciente_presuncion
+    (dni ?dni)
+    (diagnostico $?diagnosticos)
+  )
+  (test (not (subsetp (create$ NEUROSISOBSESIVA) $?diagnosticos)))
+  (test
+    (and
+      (member$ IDEASOBSESIVAS $?sintomas)
+      (member$ IMPULSIVO $?diagnosticos)
+      (member$ OBSESIVO $?diagnosticos)
+    )
+  )
+  =>
+  (insert$ $?diagnosticos 1 NEUROSISOBSESIVA)
+  (delete-member$ $?diagnosticos NOSE)
+)
 
 (defrule presuncion-persecusion
   (paciente_examen
@@ -111,12 +127,24 @@
   (delete-member$ $?diagnosticos NOSE)
 )
 
-; TODO Regla 27. Verificar contra los presuncions
-;(defrule presuncion-fobia
-;  ()
-;  =>
-;
-;)
+; Inferencia 27
+(defrule presuncion-fobia
+  (paciente_examen
+    (dni ?dni)
+    (sintomas $?sintomas)
+  )
+  (paciente_presuncion
+    (dni ?dni)
+    (diagnostico $?diagnosticos)
+  )
+  (test (not (subsetp (create$ FOBIA) $?diagnosticos)))
+  (test
+    (member$ PERSECUCION $?diagnosticos)
+  )
+  =>
+  (insert$ $?diagnosticos 1 FOBIA)
+  (delete-member$ $?diagnosticos NOSE)
+)
 
 (defrule presuncion-percepcionalterada
   (paciente_examen
@@ -160,12 +188,8 @@
   (delete-member$ $?diagnosticos NOSE)
 )
 
-; TODO Regla 30, mezcla entre sintoma y presuncion
+; Inferencia 30
 (defrule presuncion-esquizofrenia
-  (paciente_examen
-    (dni ?dni)
-    (sintomas $?sintomas)
-  )
   (paciente_presuncion
     (dni ?dni)
     (diagnostico $?diagnosticos)
@@ -173,12 +197,12 @@
   (test (not (subsetp (create$ ESQUIZOFRENIA) $?diagnosticos)))
   (test
     (and
-      (member$ PERCEPCIONALTERADA $?sintomas)
-      (member$ AUSENCIAEMOCIONAL $?sintomas)
+      (member$ PERCEPCIONALTERADA $?diagnosticos)
+      (member$ AUSENCIAEMOCIONAL $?diagnosticos)
     )
   )
   =>
-  (insert$ $?diagnosticos 1 PERSECUCION)
+  (insert$ $?diagnosticos 1 ESQUIZOFRENIA)
   (delete-member$ $?diagnosticos NOSE)
 )
 
@@ -336,12 +360,31 @@
   (delete-member$ $?diagnosticos NOSE)
 )
 
-; TODO Inferencia 38 mezcla
-;(defrule presuncion-psicosismaniacodepresiva
-;  ()
-;  =>
-;
-;)
+; Inferencia 38
+(defrule presuncion-psicosismaniacodepresiva
+  (paciente_examen
+    (dni ?dni)
+    (sintomas $?sintomas)
+  )
+  (paciente_presuncion
+    (dni ?dni)
+    (diagnostico $?diagnosticos)
+  )
+  (test (not (subsetp (create$ PSICOSISMANIACODEPRESIVA) $?diagnosticos)))
+  (test
+    (and
+      (member$ ESTADOSDEANIMODEPRESIVOS $?diagnosticos)
+      (member$ DESMOTIVACION $?diagnosticos)
+      (member$ DESGANO $?diagnosticos)
+      (member$ TENDENCIASUICIDA $?diagnosticos)
+      (member$ ESTADOSMANIACODEHIPERACTIVIDAD $?diagnosticos)
+      (member$ ACELERAMIENTO $?diagnosticos)
+    )
+  )
+  =>
+  (insert$ $?diagnosticos 1 PSICOSISMANIACODEPRESIVA)
+  (delete-member$ $?diagnosticos NOSE)
+)
 
 ; Inferencia 39
 (defrule presuncion-estrestemporal
@@ -389,12 +432,8 @@
   (delete-member$ $?diagnosticos NOSE)
 )
 
-; TODO Inferencia 41. Sobre presuncions
+; Inferencia 41. Sobre presuncions
 (defrule presuncion-ataquedepanico
-  (paciente_examen
-    (dni ?dni)
-    (sintomas $?sintomas)
-  )
   (paciente_presuncion
     (dni ?dni)
     (diagnostico $?diagnosticos)
@@ -402,8 +441,8 @@
   (test (not (subsetp (create$ ATAQUEDEPANICO) $?diagnosticos)))
   (test
     (and
-      (member$ ESTRES $?sintomas)
-      (member$ SUDORACION $?sintomas)
+      (member$ ESTRESTEMPORAL $?diagnosticos)
+      (member$ FUERTEANGUSTIA $?diagnosticos)
     )
   )
   =>

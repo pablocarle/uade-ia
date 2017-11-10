@@ -1,5 +1,3 @@
-; TODO Instructivo de instalacion / ejecucion.
-
 (deftemplate paciente
 	(slot nombre (type STRING))
 	(slot dni (type NUMBER))
