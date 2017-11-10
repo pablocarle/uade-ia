@@ -679,7 +679,32 @@
   )
 )
 
-; inferencia (TODO)
+; Inferencia 57
+(defrule diagnostico-otraspatologias-panico
+  (paciente_presuncion
+    (dni ?dni)
+    (diagnostico $?diagnosticos)
+  )
+  ?PACIENTE <- (paciente
+    (dni ?dni)
+    (diagnostico NOSE)
+  )
+  (test
+    (member$ ATAQUEDEPANICO $?diagnosticos)
+  )
+  =>
+  (assert
+    (paciente_diagnostico
+      (dni ?dni)
+      (diagnostico OTRASPATOLOGIAS)
+    )
+  )
+  (modify ?PACIENTE
+    (diagnostico ASIGNADO)
+  )
+)
+
+; Inferencia 58 / 59 / 60
 (defrule diagnostico-perversion
   (paciente_presuncion
     (dni ?dni)
@@ -691,16 +716,16 @@
   )
   (test
     (or
-      (member$ ESQUIZOFRENIA $?diagnosticos)
-      (member$ PARANOIA $?diagnosticos)
-      (member$ PSICOSISMANIACODEPRESIVA $?diagnosticos)
+      (member$ FETICHISMO $?diagnosticos)
+      (member$ SADISMO $?diagnosticos)
+      (member$ EXHIBICIONISMO $?diagnosticos)
     )
   )
   =>
   (assert
     (paciente_diagnostico
       (dni ?dni)
-      (diagnostico PSICOSIS)
+      (diagnostico PERVERSION)
     )
   )
   (modify ?PACIENTE
