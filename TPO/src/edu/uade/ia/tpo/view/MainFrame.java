@@ -11,7 +11,6 @@ import java.awt.event.ActionEvent;
 import java.awt.event.WindowEvent;
 import java.awt.event.WindowListener;
 import java.io.IOException;
-import java.net.URI;
 import java.net.URISyntaxException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
@@ -60,7 +59,7 @@ public class MainFrame {
     private void initializeLog() {
         this.log = new StringBuilder();
         try {
-            log.append(Files.readAllLines(Paths.get(new URI("psico.log"))).stream().collect(Collectors.joining("\n")));
+            log.append(Files.readAllLines(Paths.get("psico.log")).stream().collect(Collectors.joining("\n")));
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -68,7 +67,7 @@ public class MainFrame {
 
     private void initializeSavedPatients() {
         try {
-            this.patients = Files.readAllLines(Paths.get(new URI("patients.csv")));
+            this.patients = Files.readAllLines(Paths.get("patients.csv"));
             this.patients.forEach(csvPatient -> clipsService.addPatient(Patient.fromCsv(csvPatient)));
         } catch (Exception e) {
             e.printStackTrace();
@@ -307,11 +306,18 @@ public class MainFrame {
 
     private void closeFiles() {
         try {
-            Files.write(Paths.get(new URI("psico.log")), Arrays.stream(log.toString().split("\n")).collect(Collectors.toList()));
-        } catch (IOException | URISyntaxException e) {
+            Files.write(Paths.get("psico.log"), Arrays.stream(log.toString().split("\n")).collect(Collectors.toList()));
+            System.out.println("Escrito psico.log");
+        } catch (IOException e) {
             e.printStackTrace();
         }
 
+        try {
+            Files.write(Paths.get("patients.csv"), patients);
+            System.out.println("Escrito patients.csv");
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     private void addToActivityLog(final String diagnostic) {
