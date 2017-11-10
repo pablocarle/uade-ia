@@ -640,6 +640,44 @@
   )
 )
 
+; Inferencia 61 / 62 / 63
+(defrule diagnostico-neurosis-antecedente
+  (paciente_presuncion
+    (dni ?dni)
+    (diagnostico $?diagnosticos)
+  )
+  ?PACIENTE <- (paciente
+    (dni ?dni)
+    (diagnostico NOSE)
+  )
+  (test
+    (and
+      (member$ NEUROSIS $?diagnosticos)
+      (or
+        (and
+          (member$ INESTABILIDADEMOCIONAL $?diagnosticos)
+          (member$ HISTERIA $?diagnosticos)
+        )
+        (and
+          (member$ PERSECUCION $?diagnosticos)
+          (member$ IMPULSIVO $?diagnosticos)
+        )
+        (member$ FOBIA $?diagnosticos)
+      )
+    )
+  )
+  =>
+  (assert
+    (paciente_diagnostico
+      (dni ?dni)
+      (diagnostico NEUROSIS)
+    )
+  )
+  (modify ?PACIENTE
+    (diagnostico ASIGNADO)
+  )
+)
+
 ; Inferencia 64 / 65 / 66 / 67 / 68
 (defrule diagnostico-psicosis-antecedente
   (paciente_presuncion
