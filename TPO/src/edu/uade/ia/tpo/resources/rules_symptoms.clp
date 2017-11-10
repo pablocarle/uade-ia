@@ -640,7 +640,85 @@
   )
 )
 
+; Inferencia 64 / 65 / 66 / 67 / 68
+(defrule diagnostico-psicosis-antecedente
+  (paciente_presuncion
+    (dni ?dni)
+    (diagnostico $?diagnosticos)
+  )
+  ?PACIENTE <- (paciente
+    (dni ?dni)
+    (diagnostico NOSE)
+  )
+  (test
+    (and
+      (member$ PSICOSIS $?diagnosticos)
+      (or
+        (and
+          (member$ PERCEPCIONALTERADA $?diagnosticos)
+          (member$ PARANOIA $?diagnosticos)
+        )
+        (and
+          (member$ ESQUIZOFRENIA $?diagnosticos)
+          (member$ PARANOIA $?diagnosticos)
+        )
+        (and
+          (member$ ESTADOSDEANIMODEPRESIVOS $?diagnosticos)
+          (member$ DESMOTIVACION $?diagnosticos)
+        )
+        (and
+          (member$ DESGANO $?diagnosticos)
+          (member$ ESTADOSMANIACODEHIPERACTIVIDAD $?diagnosticos)
+        )
+        (member$ TENDENCIASUICIDA $?diagnosticos)
+      )
+    )
+  )
+  =>
+  (assert
+    (paciente_diagnostico
+      (dni ?dni)
+      (diagnostico PSICOSIS)
+    )
+  )
+  (modify ?PACIENTE
+    (diagnostico ASIGNADO)
+  )
+)
 
+; Inferencia 69 / 70
+(defrule diagnostico-otraspatologias-2
+  (paciente_presuncion
+    (dni ?dni)
+    (diagnostico $?diagnosticos)
+  )
+  ?PACIENTE <- (paciente
+    (dni ?dni)
+    (diagnostico NOSE)
+  )
+  (test
+    (and
+      (member$ OTRASPATOLOGIAS $?diagnosticos)
+      (or
+        (member$ TRASTORNOSALIMENTICIOS $?diagnosticos)
+        (and
+          (member$ ESTRESTEMPORAL $?diagnosticos)
+          (member$ FUERTEANGUSTIA $?diagnosticos)
+        )
+      )
+    )
+  )
+  =>
+  (assert
+    (paciente_diagnostico
+      (dni ?dni)
+      (diagnostico OTRASPATOLOGIAS)
+    )
+  )
+  (modify ?PACIENTE
+    (diagnostico ASIGNADO)
+  )
+)
 
 ; Inferencia 71 / 72 / 73 / 74 / 75
 (defrule diagnostico-perversion-antecedente-1
