@@ -556,14 +556,26 @@
   (delete-member$ $?diagnosticos NOSE)
 )
 
-; TODO Inferencia 48 mezcla
-;(defrule presuncion-fetichismo
-;  ()
-;  =>
-;
-;)
+; Inferencia 48
+(defrule presuncion-fetichismo
+  (paciente_presuncion
+    (dni ?dni)
+    (diagnostico $?diagnosticos)
+  )
+  (test (not (subsetp (create$ FETICHISMO) $?diagnosticos)))
+  (test
+    (and
+      (member$ IMPULSIVIDADSEXUAL $?diagnosticos)
+      (member$ TRASTORNOSEXUAL $?diagnosticos)
+      (member$ PLACERESASEXUALES $?diagnosticos)
+    )
+  )
+  =>
+  (insert$ $?diagnosticos 1 FETICHISMO)
+  (delete-member$ $?diagnosticos NOSE)
+)
 
-; TODO Inferencia 49 Mezcla
+; Inferencia 49
 (defrule presuncion-sadismo
   (paciente_examen
     (dni ?dni)
@@ -575,21 +587,38 @@
   )
   (test (not (subsetp (create$ SADISMO) $?diagnosticos)))
   (test
-    (or
-      (member$ PLACERSEXUALCONUNTALISMAN $?sintomas)
-      (member$ PLACERSEXUALCONORGANOSNOSEXUALES $?sintomas)
+    (and
+      (member$ IMPULSIVIDADSEXUAL $?diagnosticos)
+      (member$ TRASTORNOSEXUAL $?diagnosticos)
+      (member$ PLACERSEXUALATRAVESDELDOLORFISICO $?sintomas)
     )
   )
   =>
-  (insert$ $?diagnosticos 1 PLACERESASEXUALES)
+  (insert$ $?diagnosticos 1 SADISMO)
   (delete-member$ $?diagnosticos NOSE)
 )
 
-; TODO Inferencia 50 Mezcla
+; Inferencia 50
 (defrule presuncion-exhibicionismo
-  ()
+  (paciente_examen
+    (dni ?dni)
+    (sintomas $?sintomas)
+  )
+  (paciente_presuncion
+    (dni ?dni)
+    (diagnostico $?diagnosticos)
+  )
+  (test (not (subsetp (create$ EXHIBICIONISMO) $?diagnosticos)))
+  (test
+    (and
+      (member$ IMPULSIVIDADSEXUAL $?diagnosticos)
+      (member$ TRASTORNOSEXUAL $?diagnosticos)
+      (member$ PRACTICASSEXUALESENPUBLICO $?sintomas)
+    )
+  )
   =>
-
+  (insert$ $?diagnosticos 1 EXHIBICIONISMO)
+  (delete-member$ $?diagnosticos NOSE)
 )
 
 ; Inferencia 51 / 52 / 53
