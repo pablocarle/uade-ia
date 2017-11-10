@@ -523,3 +523,161 @@
 ;  =>
 ;
 ;)
+
+; TODO Inferencia 49 Mezcla
+(defrule presuncion-sadismo
+  (paciente_examen
+    (dni ?dni)
+    (sintomas $?sintomas)
+  )
+  (paciente_presuncion
+    (dni ?dni)
+    (diagnostico $?diagnosticos)
+  )
+  (test (not (subsetp (create$ SADISMO) $?diagnosticos)))
+  (test
+    (or
+      (member$ PLACERSEXUALCONUNTALISMAN $?sintomas)
+      (member$ PLACERSEXUALCONORGANOSNOSEXUALES $?sintomas)
+    )
+  )
+  =>
+  (insert$ $?diagnosticos 1 PLACERESASEXUALES)
+  (delete-member$ $?diagnosticos NOSE)
+)
+
+; TODO Inferencia 50 Mezcla
+(defrule presuncion-exhibicionismo
+  ()
+  =>
+
+)
+
+; Inferencia 51 / 52 / 53
+(defrule diagnostico-neurosis
+  (paciente_presuncion
+    (dni ?dni)
+    (diagnostico $?diagnosticos)
+  )
+  (test
+    (or
+      (member$ HISTERIA $?diagnosticos)
+      (member$ NEUROSISOBSESIVA $?diagnosticos)
+      (member$ FOBIA $?diagnosticos)
+    )
+  )
+  =>
+  (assert
+    (paciente_diagnostico
+      (dni ?dni)
+      (diagnostico NEUROSIS)
+    )
+  )
+)
+
+; Inferencia 54 / 55 / 56
+(defrule diagnostico-psicosis
+  (paciente_presuncion
+    (dni ?dni)
+    (diagnostico $?diagnosticos)
+  )
+  (test
+    (or
+      (member$ ESQUIZOFRENIA $?diagnosticos)
+      (member$ PARANOIA $?diagnosticos)
+      (member$ PSICOSISMANIACODEPRESIVA $?diagnosticos)
+    )
+  )
+  =>
+  (assert
+    (paciente_diagnostico
+      (dni ?dni)
+      (diagnostico PSICOSIS)
+    )
+  )
+)
+
+; inferencia (TODO)
+(defrule diagnostico-perversion
+  (paciente_presuncion
+    (dni ?dni)
+    (diagnostico $?diagnosticos)
+  )
+  (test
+    (or
+      (member$ ESQUIZOFRENIA $?diagnosticos)
+      (member$ PARANOIA $?diagnosticos)
+      (member$ PSICOSISMANIACODEPRESIVA $?diagnosticos)
+    )
+  )
+  =>
+  (assert
+    (paciente_diagnostico
+      (dni ?dni)
+      (diagnostico PSICOSIS)
+    )
+  )
+)
+
+
+; Inferencia 71 / 72 / 73 / 74 / 75
+(defrule diagnostico-perversion-antecedente-1
+  (paciente_presuncion
+    (dni ?dni)
+    (diagnostico $?diagnosticos)
+  )
+  ?PACIENTE <- (paciente
+    (dni ?dni)
+    (diagnostico NOSE)
+  )
+  (test
+    (and
+      (member$ PERVERSIONES $?diagnosticos)
+      (or
+        (member$ SADISMO $?diagnosticos)
+        (member$ EXHIBICIONISMO $?diagnosticos)
+        (member$ FETICHISMO $?diagnosticos)
+        (and
+          (member$ TRASTORNOSEXUAL $?diagnosticos)
+          (member$ PLACERESASEXUALES $?diagnosticos)
+        )
+        (member$ IMPULSIVIDADSEXUAL $?diagnosticos)
+      )
+    )
+  )
+  =>
+  (assert
+    (paciente_diagnostico
+      (dni ?dni)
+      (diagnostico PERVERSION)
+    )
+  )
+  (modify ?PACIENTE
+    (diagnostico ASIGNADO)
+  )
+)
+
+; Inferencia 76
+(defrule diagnostico-otraspatologias
+  (paciente_presuncion
+    (dni ?dni)
+    (diagnostico $?diagnosticos)
+  )
+  ?PACIENTE <- (paciente
+    (dni ?dni)
+    (diagnostico NOSE)
+  )
+  (test
+    (member$ TRASTORNOSALIMENTICIOS $?diagnosticos)
+  )
+  =>
+  (assert
+    (paciente_diagnostico
+      (dni ?dni)
+      (diagnostico OTRASPATOLOGIAS)
+    )
+  )
+  (modify ?PACIENTE
+    (diagnostico ASIGNADO)
+  )
+)
