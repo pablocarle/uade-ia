@@ -3,7 +3,7 @@
     (dni ?dni)
     (sintomas $?sintomas)
   )
-  (paciente_presuncion
+  ?PRES <- (paciente_presuncion
     (dni ?dni)
     (diagnostico $?diagnosticos)
   )
@@ -16,8 +16,9 @@
     )
   )
   =>
-  (insert$ $?diagnosticos 1 INESTABILIDADEMOCIONAL)
-  (delete-member$ $?diagnosticos NOSE)
+  (modify ?PRES
+    (diagnostico (insert$ (delete-member$ $?diagnosticos NOSE) 1 INESTABILIDADEMOCIONAL))
+  )
 )
 
 (defrule presuncion-histeria
@@ -25,7 +26,7 @@
     (dni ?dni)
     (sintomas $?sintomas)
   )
-  (paciente_presuncion
+  ?PRES <- (paciente_presuncion
     (dni ?dni)
     (diagnostico $?diagnosticos)
   )
@@ -37,8 +38,9 @@
     )
   )
   =>
-  (insert$ $?diagnosticos 1 HISTERIA)
-  (delete-member$ $?diagnosticos NOSE)
+  (modify ?PRES
+    (diagnostico (insert$ (delete-member$ $?diagnosticos NOSE) 1 HISTERIA))
+  )
 )
 
 (defrule presuncion-impulsivo
@@ -46,7 +48,7 @@
     (dni ?dni)
     (sintomas $?sintomas)
   )
-  (paciente_presuncion
+  ?PRES <- (paciente_presuncion
     (dni ?dni)
     (diagnostico $?diagnosticos)
   )
@@ -58,8 +60,9 @@
     )
   )
   =>
-  (insert$ $?diagnosticos 1 IMPULSIVO)
-  (delete-member$ $?diagnosticos NOSE)
+  (modify ?PRES
+    (diagnostico (insert$ (delete-member$ $?diagnosticos NOSE) 1 IMPULSIVO))
+  )
 )
 
 (defrule presuncion-obsesivo
@@ -67,7 +70,7 @@
     (dni ?dni)
     (sintomas $?sintomas)
   )
-  (paciente_presuncion
+  ?PRES <- (paciente_presuncion
     (dni ?dni)
     (diagnostico $?diagnosticos)
   )
@@ -79,8 +82,9 @@
     )
   )
   =>
-  (insert$ $?diagnosticos 1 OBSESIVO)
-  (delete-member$ $?diagnosticos NOSE)
+  (modify ?PRES
+    (diagnostico (insert$ (delete-member$ $?diagnosticos NOSE) 1 OBSESIVO))
+  )
 )
 
 ; Inferencia 25
@@ -89,7 +93,7 @@
     (dni ?dni)
     (sintomas $?sintomas)
   )
-  (paciente_presuncion
+  ?PRES <- (paciente_presuncion
     (dni ?dni)
     (diagnostico $?diagnosticos)
   )
@@ -102,8 +106,9 @@
     )
   )
   =>
-  (insert$ $?diagnosticos 1 NEUROSISOBSESIVA)
-  (delete-member$ $?diagnosticos NOSE)
+  (modify ?PRES
+    (diagnostico (insert$ (delete-member$ $?diagnosticos NOSE) 1 NEUROSISOBSESIVA))
+  )
 )
 
 (defrule presuncion-persecusion
@@ -111,7 +116,7 @@
     (dni ?dni)
     (sintomas $?sintomas)
   )
-  (paciente_presuncion
+  ?PRES <- (paciente_presuncion
     (dni ?dni)
     (diagnostico $?diagnosticos)
   )
@@ -123,8 +128,9 @@
     )
   )
   =>
-  (insert$ $?diagnosticos 1 PERSECUCION)
-  (delete-member$ $?diagnosticos NOSE)
+  (modify ?PRES
+    (diagnostico (insert$ (delete-member$ $?diagnosticos NOSE) 1 PERSECUCION))
+  )
 )
 
 ; Inferencia 27
@@ -133,7 +139,7 @@
     (dni ?dni)
     (sintomas $?sintomas)
   )
-  (paciente_presuncion
+  ?PRES <- (paciente_presuncion
     (dni ?dni)
     (diagnostico $?diagnosticos)
   )
@@ -142,8 +148,9 @@
     (member$ PERSECUCION $?diagnosticos)
   )
   =>
-  (insert$ $?diagnosticos 1 FOBIA)
-  (delete-member$ $?diagnosticos NOSE)
+  (modify ?PRES
+    (diagnostico (insert$ (delete-member$ $?diagnosticos NOSE) 1 FOBIA))
+  )
 )
 
 (defrule presuncion-percepcionalterada
@@ -151,7 +158,7 @@
     (dni ?dni)
     (sintomas $?sintomas)
   )
-  (paciente_presuncion
+  ?PRES <- (paciente_presuncion
     (dni ?dni)
     (diagnostico $?diagnosticos)
   )
@@ -163,8 +170,9 @@
     )
   )
   =>
-  (insert$ $?diagnosticos 1 PERCEPCIONALTERADA)
-  (delete-member$ $?diagnosticos NOSE)
+  (modify ?PRES
+    (diagnostico (insert$ (delete-member$ $?diagnosticos NOSE) 1 PERCEPCIONALTERADA))
+  )
 )
 
 (defrule presuncion-ausenciaemocional
@@ -172,7 +180,7 @@
     (dni ?dni)
     (sintomas $?sintomas)
   )
-  (paciente_presuncion
+  ?PRES <- (paciente_presuncion
     (dni ?dni)
     (diagnostico $?diagnosticos)
   )
@@ -184,13 +192,14 @@
     )
   )
   =>
-  (insert$ $?diagnosticos 1 AUSENCIAEMOCIONAL)
-  (delete-member$ $?diagnosticos NOSE)
+  (modify ?PRES
+    (diagnostico (insert$ (delete-member$ $?diagnosticos NOSE) 1 AUSENCIAEMOCIONAL))
+  )
 )
 
 ; Inferencia 30
 (defrule presuncion-esquizofrenia
-  (paciente_presuncion
+  ?PRES <- (paciente_presuncion
     (dni ?dni)
     (diagnostico $?diagnosticos)
   )
@@ -202,8 +211,9 @@
     )
   )
   =>
-  (insert$ $?diagnosticos 1 ESQUIZOFRENIA)
-  (delete-member$ $?diagnosticos NOSE)
+  (modify ?PRES
+    (diagnostico (insert$ (delete-member$ $?diagnosticos NOSE) 1 ESQUIZOFRENIA))
+  )
 )
 
 (defrule presuncion-paranoia
@@ -211,7 +221,7 @@
     (dni ?dni)
     (sintomas $?sintomas)
   )
-  (paciente_presuncion
+  ?PRES <- (paciente_presuncion
     (dni ?dni)
     (diagnostico $?diagnosticos)
   )
@@ -224,8 +234,9 @@
     )
   )
   =>
-  (insert$ $?diagnosticos 1 PARANOIA)
-  (delete-member$ $?diagnosticos NOSE)
+  (modify ?PRES
+    (diagnostico (insert$ (delete-member$ $?diagnosticos NOSE) 1 PARANOIA))
+  )
 )
 
 ; inferencia 32
@@ -234,7 +245,7 @@
     (dni ?dni)
     (sintomas $?sintomas)
   )
-  (paciente_presuncion
+  ?PRES <- (paciente_presuncion
     (dni ?dni)
     (diagnostico $?diagnosticos)
   )
@@ -246,8 +257,9 @@
     )
   )
   =>
-  (insert$ $?diagnosticos 1 ESTADOSDEANIMODEPRESIVOS)
-  (delete-member$ $?diagnosticos NOSE)
+  (modify ?PRES
+    (diagnostico (insert$ (delete-member$ $?diagnosticos NOSE) 1 ESTADOSDEANIMODEPRESIVOS))
+  )
 )
 
 ; inferencia 33
@@ -256,7 +268,7 @@
     (dni ?dni)
     (sintomas $?sintomas)
   )
-  (paciente_presuncion
+  ?PRES <- (paciente_presuncion
     (dni ?dni)
     (diagnostico $?diagnosticos)
   )
@@ -268,8 +280,9 @@
     )
   )
   =>
-  (insert$ $?diagnosticos 1 DESMOTIVACION)
-  (delete-member$ $?diagnosticos NOSE)
+  (modify ?PRES
+    (diagnostico (insert$ (delete-member$ $?diagnosticos NOSE) 1 DESMOTIVACION))
+  )
 )
 
 ; inferencia 34
@@ -278,7 +291,7 @@
     (dni ?dni)
     (sintomas $?sintomas)
   )
-  (paciente_presuncion
+  ?PRES <- (paciente_presuncion
     (dni ?dni)
     (diagnostico $?diagnosticos)
   )
@@ -290,8 +303,9 @@
     )
   )
   =>
-  (insert$ $?diagnosticos 1 DESGANO)
-  (delete-member$ $?diagnosticos NOSE)
+  (modify ?PRES
+    (diagnotico (insert$ (delete-member$ $?diagnosticos NOSE) 1 DESGANO))
+  )
 )
 
 ; inferencia 35
@@ -300,7 +314,7 @@
     (dni ?dni)
     (sintomas $?sintomas)
   )
-  (paciente_presuncion
+  ?PRES <- (paciente_presuncion
     (dni ?dni)
     (diagnostico $?diagnosticos)
   )
@@ -312,8 +326,9 @@
     )
   )
   =>
-  (insert$ $?diagnosticos 1 TENDENCIASUICIDA)
-  (delete-member$ $?diagnosticos NOSE)
+  (modify ?PRES
+    (diagnostico (insert$ (delete-member$ $?diagnosticos NOSE) 1 TENDENCIASUICIDA))
+  )
 )
 
 ; inferencia 36
@@ -322,7 +337,7 @@
     (dni ?dni)
     (sintomas $?sintomas)
   )
-  (paciente_presuncion
+  ?PRES <- (paciente_presuncion
     (dni ?dni)
     (diagnostico $?diagnosticos)
   )
@@ -334,8 +349,9 @@
     )
   )
   =>
-  (insert$ $?diagnosticos 1 ESTADOSMANIACODEHIPERACTIVIDAD)
-  (delete-member$ $?diagnosticos NOSE)
+  (modify ?PRES
+    (diagnostico (insert$ (delete-member$ $?diagnosticos NOSE) 1 ESTADOSMANIACODEHIPERACTIVIDAD))
+  )
 )
 
 ; inferencia 37
@@ -344,7 +360,7 @@
     (dni ?dni)
     (sintomas $?sintomas)
   )
-  (paciente_presuncion
+  ?PRES <- (paciente_presuncion
     (dni ?dni)
     (diagnostico $?diagnosticos)
   )
@@ -356,8 +372,9 @@
     )
   )
   =>
-  (insert$ $?diagnosticos 1 ACELERAMIENTO)
-  (delete-member$ $?diagnosticos NOSE)
+  (modify ?PRES
+    (diagnostico (insert$ (delete-member$ $?diagnosticos NOSE) 1 ACELERAMIENTO))
+  )
 )
 
 ; Inferencia 38
@@ -366,7 +383,7 @@
     (dni ?dni)
     (sintomas $?sintomas)
   )
-  (paciente_presuncion
+  ?PRES <- (paciente_presuncion
     (dni ?dni)
     (diagnostico $?diagnosticos)
   )
@@ -382,8 +399,9 @@
     )
   )
   =>
-  (insert$ $?diagnosticos 1 PSICOSISMANIACODEPRESIVA)
-  (delete-member$ $?diagnosticos NOSE)
+  (modify ?PRES
+    (diagnostico (insert$ (delete-member$ $?diagnosticos NOSE) 1 PSICOSISMANIACODEPRESIVA))
+  )
 )
 
 ; Inferencia 39
@@ -392,7 +410,7 @@
     (dni ?dni)
     (sintomas $?sintomas)
   )
-  (paciente_presuncion
+  ?PRES <- (paciente_presuncion
     (dni ?dni)
     (diagnostico $?diagnosticos)
   )
@@ -404,8 +422,9 @@
     )
   )
   =>
-  (insert$ $?diagnosticos 1 ESTRESTEMPORAL)
-  (delete-member$ $?diagnosticos NOSE)
+  (modify ?PRES
+    (diagnostico (insert$ (delete-member$ $?diagnosticos NOSE) 1 ESTRESTEMPORAL))
+  )
 )
 
 ; Inferencia 40
@@ -414,7 +433,7 @@
     (dni ?dni)
     (sintomas $?sintomas)
   )
-  (paciente_presuncion
+  ?PRES <- (paciente_presuncion
     (dni ?dni)
     (diagnostico $?diagnosticos)
   )
@@ -428,13 +447,14 @@
     )
   )
   =>
-  (insert$ $?diagnosticos 1 FUERTEANGUSTIA)
-  (delete-member$ $?diagnosticos NOSE)
+  (modify ?PRES
+    (diagnostico (insert$ (delete-member$ $?diagnosticos NOSE) 1 FUERTEANGUSTIA))
+  )
 )
 
 ; Inferencia 41. Sobre presuncions
 (defrule presuncion-ataquedepanico
-  (paciente_presuncion
+  ?PRES <- (paciente_presuncion
     (dni ?dni)
     (diagnostico $?diagnosticos)
   )
@@ -446,8 +466,9 @@
     )
   )
   =>
-  (insert$ $?diagnosticos 1 ATAQUEDEPANICO)
-  (delete-member$ $?diagnosticos NOSE)
+  (modify ?PRES
+    (diagnostico (insert$ (delete-member$ $?diagnosticos NOSE) 1 ATAQUEDEPANICO))
+  )
 )
 
 ; inferencia 42 / 43
@@ -456,7 +477,7 @@
     (dni ?dni)
     (sintomas $?sintomas)
   )
-  (paciente_presuncion
+  ?PRES <- (paciente_presuncion
     (dni ?dni)
     (diagnostico $?diagnosticos)
   )
@@ -468,8 +489,9 @@
     )
   )
   =>
-  (insert$ $?diagnosticos 1 TRASTORNOSALIMENTICIOS)
-  (delete-member$ $?diagnosticos NOSE)
+  (modify ?PRES
+    (diagnostico (insert$ (delete-member$ $?diagnosticos NOSE) 1 TRASTORNOSALIMENTICIOS))
+  )
 )
 
 ; inferencia 44
@@ -496,7 +518,7 @@
     (dni ?dni)
     (sintomas $?sintomas)
   )
-  (paciente_presuncion
+  ?PRES <- (paciente_presuncion
     (dni ?dni)
     (diagnostico $?diagnosticos)
   )
@@ -508,8 +530,9 @@
     )
   )
   =>
-  (insert$ $?diagnosticos 1 IMPULSIVIDADSEXUAL)
-  (delete-member$ $?diagnosticos NOSE)
+  (modify ?PRES
+    (diagnostico (insert$ (delete-member$ $?diagnosticos NOSE) 1 IMPULSIVIDADSEXUAL))
+  )
 )
 
 ; Inferencia 46
@@ -518,7 +541,7 @@
     (dni ?dni)
     (sintomas $?sintomas)
   )
-  (paciente_presuncion
+  ?PRES <- (paciente_presuncion
     (dni ?dni)
     (diagnostico $?diagnosticos)
   )
@@ -530,8 +553,9 @@
     )
   )
   =>
-  (insert$ $?diagnosticos 1 TRASTORNOSEXUAL)
-  (delete-member$ $?diagnosticos NOSE)
+  (modify ?PRES
+    (diagnostico (insert$ (delete-member$ $?diagnosticos NOSE) 1 TRASTORNOSEXUAL))
+  )
 )
 
 ; Inferencia 47
@@ -540,7 +564,7 @@
     (dni ?dni)
     (sintomas $?sintomas)
   )
-  (paciente_presuncion
+  ?PRES <- (paciente_presuncion
     (dni ?dni)
     (diagnostico $?diagnosticos)
   )
@@ -552,13 +576,14 @@
     )
   )
   =>
-  (insert$ $?diagnosticos 1 PLACERESASEXUALES)
-  (delete-member$ $?diagnosticos NOSE)
+  (modify ?PRES
+    (diagnostico (insert$ (delete-member$ $?diagnosticos NOSE) 1 PLACERESASEXUALES))
+  )
 )
 
 ; Inferencia 48
 (defrule presuncion-fetichismo
-  (paciente_presuncion
+  ?PRES <- (paciente_presuncion
     (dni ?dni)
     (diagnostico $?diagnosticos)
   )
@@ -571,8 +596,9 @@
     )
   )
   =>
-  (insert$ $?diagnosticos 1 FETICHISMO)
-  (delete-member$ $?diagnosticos NOSE)
+  (modify ?PRES
+    (diagnostico (insert$ (delete-member$ $?diagnosticos NOSE) 1 FETICHISMO))
+  )
 )
 
 ; Inferencia 49
@@ -581,7 +607,7 @@
     (dni ?dni)
     (sintomas $?sintomas)
   )
-  (paciente_presuncion
+  ?PRES <- (paciente_presuncion
     (dni ?dni)
     (diagnostico $?diagnosticos)
   )
@@ -594,8 +620,9 @@
     )
   )
   =>
-  (insert$ $?diagnosticos 1 SADISMO)
-  (delete-member$ $?diagnosticos NOSE)
+  (modify ?PRES
+    (diagnostico (insert$ (delete-member$ $?diagnosticos NOSE) 1 SADISMO))
+  )
 )
 
 ; Inferencia 50
@@ -604,7 +631,7 @@
     (dni ?dni)
     (sintomas $?sintomas)
   )
-  (paciente_presuncion
+  ?PRES <- (paciente_presuncion
     (dni ?dni)
     (diagnostico $?diagnosticos)
   )
@@ -617,8 +644,9 @@
     )
   )
   =>
-  (insert$ $?diagnosticos 1 EXHIBICIONISMO)
-  (delete-member$ $?diagnosticos NOSE)
+  (modify ?PRES
+    (diagnostico (insert$ (delete-member$ $?diagnosticos NOSE) 1 EXHIBICIONISMO))
+  )
 )
 
 ; Inferencia 51 / 52 / 53
