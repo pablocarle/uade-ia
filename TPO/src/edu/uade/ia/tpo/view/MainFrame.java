@@ -44,7 +44,7 @@ public class MainFrame {
     private StringBuilder log;
     private List<String> patients;
 
-    public MainFrame() throws IOException, URISyntaxException {
+    private MainFrame() throws IOException, URISyntaxException {
         super();
         clipsService = ShrinkClipsService.get();
         initialize();

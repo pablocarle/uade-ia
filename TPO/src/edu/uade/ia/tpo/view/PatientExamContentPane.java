@@ -247,7 +247,6 @@ public class PatientExamContentPane {
 
         void setSelectedSymptom(int index) {
             if (index >= 0) {
-                System.out.println("Modificar selected de indice " + index + " de " + selected[index] + " a " + !selected[index]);
                 selected[index] = !selected[index];
                 if (selected[index] && index >= 1) {
                     selected[0] = false;
