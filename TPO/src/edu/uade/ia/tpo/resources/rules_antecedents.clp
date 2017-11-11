@@ -3,14 +3,15 @@
     (dni ?dni)
     (antecedente NEUROSIS)
   )
-  (paciente_presuncion
+  ?PRES <- (paciente_presuncion
     (dni ?dni)
     (diagnostico $?diagnosticos)
   )
   (test (not (subsetp (create$ NEUROSIS) $?diagnosticos)))
   =>
-  (insert$ $?diagnosticos 1 NEUROSIS)
-  (delete-member$ $?diagnosticos NOSE)
+  (modify ?PRES
+    (diagnostico (insert$ (delete-member$ $?diagnosticos NOSE) 1 NEUROSIS))
+  )
   (printout t "Insertado presuncion NEUROSIS" crlf)
 )
 
@@ -19,14 +20,15 @@
     (dni ?dni)
     (antecedente PSICOSIS)
   )
-  (paciente_presuncion
+  ?PRES <- (paciente_presuncion
     (dni ?dni)
     (diagnostico $?diagnosticos)
   )
   (test (not (subsetp (create$ PSICOSIS) $?diagnosticos)))
   =>
-  (insert$ $?diagnosticos 1 PSICOSIS)
-  (delete-member$ $?diagnosticos NOSE)
+  (modify ?PRES
+    (diagnostico (insert$ (delete-member$ $?diagnosticos NOSE) 1 PSICOSIS))
+  )
   (printout t "Insertado presuncion PSICOSIS" crlf)
 )
 
@@ -35,14 +37,15 @@
     (dni ?dni)
     (antecedente PERVERSIONES)
   )
-  (paciente_presuncion
+  ?PRES <- (paciente_presuncion
     (dni ?dni)
     (diagnostico $?diagnosticos)
   )
   (test (not (subsetp (create$ PERVERSIONES) $?diagnosticos)))
   =>
-  (insert$ $?diagnosticos 1 PERVERSIONES)
-  (delete-member$ $?diagnosticos NOSE)
+  (modify ?PRES
+    (diagnostico (insert$ (delete-member$ $?diagnosticos NOSE) 1 PERVERSIONES))
+  )
   (printout t "Insertado presuncion PERVERSIONES" crlf)
 )
 
@@ -51,14 +54,15 @@
     (dni ?dni)
     (antecedente OTRASPATOLOGIAS)
   )
-  (paciente_presuncion
+  ?PRES <- (paciente_presuncion
     (dni ?dni)
     (diagnostico $?diagnosticos)
   )
   (test (not (subsetp (create$ OTRASPATOLOGIAS) $?diagnosticos)))
   =>
-  (insert$ $?diagnosticos 1 OTRASPATOLOGIAS)
-  (delete-member$ $?diagnosticos NOSE)
+  (modify ?PRES
+    (diagnostico (insert$ (delete-member$ $?diagnosticos NOSE) 1 OTRASPATOLOGIAS))
+  )
   (printout t "Insertado presuncion OTRASPATOLOGIAS" crlf)
 )
 
@@ -67,14 +71,15 @@
     (dni ?dni)
     (antecedente HISTERIAS)
   )
-  (paciente_presuncion
+  ?PRES <- (paciente_presuncion
     (dni ?dni)
     (diagnostico $?diagnosticos)
   )
   (test (not (subsetp (create$ NEUROSIS) $?diagnosticos)))
   =>
-  (insert$ $?diagnosticos 1 NEUROSIS)
-  (delete-member$ $?diagnosticos NOSE)
+  (modify ?PRES
+    (diagnostico (insert$ (delete-member$ $?diagnosticos NOSE) 1 NEUROSIS))
+  )
   (printout t "Insertado presuncion Histerias-NEUROSIS" crlf)
 )
 
@@ -83,14 +88,15 @@
     (dni ?dni)
     (antecedente NEUROSISOBSESIVA)
   )
-  (paciente_presuncion
+  ?PRES <- (paciente_presuncion
     (dni ?dni)
     (diagnostico $?diagnosticos)
   )
   (test (not (subsetp (create$ NEUROSIS) $?diagnosticos)))
   =>
-  (insert$ $?diagnosticos 1 NEUROSIS)
-  (delete-member$ $?diagnosticos NOSE)
+  (modify ?PRES
+    (diagnostico (insert$ (delete-member$ $?diagnosticos NOSE) 1 NEUROSIS))
+  )
   (printout t "Insertado presuncion NeurosisObsevisa-NEUROSIS" crlf)
 )
 
@@ -99,14 +105,15 @@
     (dni ?dni)
     (antecedente FOBIAS)
   )
-  (paciente_presuncion
+  ?PRES <- (paciente_presuncion
     (dni ?dni)
     (diagnostico $?diagnosticos)
   )
   (test (not (subsetp (create$ NEUROSIS) $?diagnosticos)))
   =>
-  (insert$ $?diagnosticos 1 NEUROSIS)
-  (delete-member$ $?diagnosticos NOSE)
+  (modify ?PRES
+    (diagnostico (insert$ (delete-member$ $?diagnosticos NOSE) 1 NEUROSIS))
+  )
   (printout t "Insertado presuncion Fobias-NEUROSIS" crlf)
 )
 
@@ -115,14 +122,15 @@
     (dni ?dni)
     (antecedente PARANOIAS)
   )
-  (paciente_presuncion
+  ?PRES <- (paciente_presuncion
     (dni ?dni)
     (diagnostico $?diagnosticos)
   )
   (test (not (subsetp (create$ PSICOSIS) $?diagnosticos)))
   =>
-  (insert$ $?diagnosticos 1 PSICOSIS)
-  (delete-member$ $?diagnosticos NOSE)
+  (modify ?PRES
+    (diagnostico (insert$ (delete-member$ $?diagnosticos NOSE) 1 PSICOSIS))
+  )
   (printout t "Insertado presuncion Paranoias-PSICOSIS" crlf)
 )
 
@@ -131,14 +139,15 @@
     (dni ?dni)
     (antecedente ESQUIZOFRENIA)
   )
-  (paciente_presuncion
+  ?PRES <- (paciente_presuncion
     (dni ?dni)
     (diagnostico $?diagnosticos)
   )
   (test (not (subsetp (create$ PSICOSIS) $?diagnosticos)))
   =>
-  (insert$ $?diagnosticos 1 PSICOSIS)
-  (delete-member$ $?diagnosticos NOSE)
+  (modify ?PRES
+    (diagnostico (insert$ (delete-member$ $?diagnosticos NOSE) 1 PSICOSIS))
+  )
   (printout t "Insertado presuncion Esquizofrenia-PSICOSIS" crlf)
 )
 
@@ -147,14 +156,15 @@
     (dni ?dni)
     (antecedente PARAFRENIA)
   )
-  (paciente_presuncion
+  ?PRES <- (paciente_presuncion
     (dni ?dni)
     (diagnostico $?diagnosticos)
   )
   (test (not (subsetp (create$ PSICOSIS) $?diagnosticos)))
   =>
-  (insert$ $?diagnosticos 1 PSICOSIS)
-  (delete-member$ $?diagnosticos NOSE)
+  (modify ?PRES
+    (diagnostico (insert$ (delete-member$ $?diagnosticos NOSE) 1 PSICOSIS))
+  )
   (printout t "Insertado presuncion Parafrenia-PSICOSIS" crlf)
 )
 
@@ -163,14 +173,15 @@
     (dni ?dni)
     (antecedente PSICOSISMANIACODEPRESIVA)
   )
-  (paciente_presuncion
+  ?PRES <- (paciente_presuncion
     (dni ?dni)
     (diagnostico $?diagnosticos)
   )
   (test (not (subsetp (create$ PSICOSIS) $?diagnosticos)))
   =>
-  (insert$ $?diagnosticos 1 PSICOSIS)
-  (delete-member$ $?diagnosticos NOSE)
+  (modify ?PRES
+    (diagnostico (insert$ (delete-member$ $?diagnosticos NOSE) 1 PSICOSIS))
+  )
   (printout t "Insertado presuncion PsicosisManiacoDepresiva-PSICOSIS" crlf)
 )
 
@@ -179,14 +190,15 @@
     (dni ?dni)
     (antecedente MELANCOLIA)
   )
-  (paciente_presuncion
+  ?PRES <- (paciente_presuncion
     (dni ?dni)
     (diagnostico $?diagnosticos)
   )
   (test (not (subsetp (create$ PSICOSIS) $?diagnosticos)))
   =>
-  (insert$ $?diagnosticos 1 PSICOSIS)
-  (delete-member$ $?diagnosticos NOSE)
+  (modify ?PRES
+    (diagnostico (insert$ (delete-member$ $?diagnosticos NOSE) 1 PSICOSIS))
+  )
   (printout t "Insertado presuncion Melancolia-PSICOSIS" crlf)
 )
 
@@ -195,14 +207,15 @@
     (dni ?dni)
     (antecedente FETICHISMO)
   )
-  (paciente_presuncion
+  ?PRES <- (paciente_presuncion
     (dni ?dni)
     (diagnostico $?diagnosticos)
   )
   (test (not (subsetp (create$ PERVERSIONES) $?diagnosticos)))
   =>
-  (insert$ $?diagnosticos 1 PERVERSIONES)
-  (delete-member$ $?diagnosticos NOSE)
+  (modify ?PRES
+    (diagnostico (insert$ (delete-member$ $?diagnosticos NOSE) 1 PERVERSIONES))
+  )
   (printout t "Insertado presuncion Fetichismo-PERVERSIONES" crlf)
 )
 
@@ -211,14 +224,15 @@
     (dni ?dni)
     (antecedente SADISMO)
   )
-  (paciente_presuncion
+  ?PRES <- (paciente_presuncion
     (dni ?dni)
     (diagnostico $?diagnosticos)
   )
   (test (not (subsetp (create$ PERVERSIONES) $?diagnosticos)))
   =>
-  (insert$ $?diagnosticos 1 PERVERSIONES)
-  (delete-member$ $?diagnosticos NOSE)
+  (modify ?PRES
+    (diagnostico (insert$ (delete-member$ $?diagnosticos NOSE) 1 PERVERSIONES))
+  )
   (printout t "Insertado presuncion Sadismo-PERVERSIONES" crlf)
 )
 
@@ -227,14 +241,15 @@
     (dni ?dni)
     (antecedente MASOQUISMO)
   )
-  (paciente_presuncion
+  ?PRES <- (paciente_presuncion
     (dni ?dni)
     (diagnostico $?diagnosticos)
   )
   (test (not (subsetp (create$ PERVERSIONES) $?diagnosticos)))
   =>
-  (insert$ $?diagnosticos 1 PERVERSIONES)
-  (delete-member$ $?diagnosticos NOSE)
+  (modify ?PRES
+    (diagnostico (insert$ (delete-member$ $?diagnosticos NOSE) 1 PERVERSIONES))
+  )
   (printout t "Insertado presuncion Masoquismo-PERVERSIONES" crlf)
 )
 
@@ -243,14 +258,15 @@
     (dni ?dni)
     (antecedente VOYEURISMO)
   )
-  (paciente_presuncion
+  ?PRES <- (paciente_presuncion
     (dni ?dni)
     (diagnostico $?diagnosticos)
   )
   (test (not (subsetp (create$ PERVERSIONES) $?diagnosticos)))
   =>
-  (insert$ $?diagnosticos 1 PERVERSIONES)
-  (delete-member$ $?diagnosticos NOSE)
+  (modify ?PRES
+    (diagnostico (insert$ (delete-member$ $?diagnosticos NOSE) 1 PERVERSIONES))
+  )
   (printout t "Insertado presuncion Voyeurismo-PERVERSIONES" crlf)
 )
 
@@ -259,14 +275,15 @@
     (dni ?dni)
     (antecedente EXHIBICIONISMO)
   )
-  (paciente_presuncion
+  ?PRES <- (paciente_presuncion
     (dni ?dni)
     (diagnostico $?diagnosticos)
   )
   (test (not (subsetp (create$ PERVERSIONES) $?diagnosticos)))
   =>
-  (insert$ $?diagnosticos 1 PERVERSIONES)
-  (delete-member$ $?diagnosticos NOSE)
+  (modify ?PRES
+    (diagnostico (insert$ (delete-member$ $?diagnosticos NOSE) 1 PERVERSIONES))
+  )
   (printout t "Insertado presuncion Exhibicionismo-PERVERSIONES" crlf)
 )
 
@@ -275,14 +292,15 @@
     (dni ?dni)
     (antecedente ADICCIONES)
   )
-  (paciente_presuncion
+  ?PRES <- (paciente_presuncion
     (dni ?dni)
     (diagnostico $?diagnosticos)
   )
   (test (not (subsetp (create$ OTRASPATOLOGIAS) $?diagnosticos)))
   =>
-  (insert$ $?diagnosticos 1 OTRASPATOLOGIAS)
-  (delete-member$ $?diagnosticos NOSE)
+  (modify ?PRES
+    (diagnostico (insert$ (delete-member$ $?diagnosticos NOSE) 1 OTRASPATOLOGIAS))
+  )
   (printout t "Insertado presuncion Adicciones-OTRASPATOLOGIAS" crlf)
 )
 
@@ -291,14 +309,15 @@
     (dni ?dni)
     (antecedente TRASTORNOSALIMENTICIOS)
   )
-  (paciente_presuncion
+  ?PRES <- (paciente_presuncion
     (dni ?dni)
     (diagnostico $?diagnosticos)
   )
   (test (not (subsetp (create$ OTRASPATOLOGIAS) $?diagnosticos)))
   =>
-  (insert$ $?diagnosticos 1 OTRASPATOLOGIAS)
-  (delete-member$ $?diagnosticos NOSE)
+  (modify ?PRES
+    (diagnostico (insert$ (delete-member$ $?diagnosticos NOSE) 1 OTRASPATOLOGIAS))
+  )
   (printout t "Insertado presuncion TrastornosAlimenticios-OTRASPATOLOGIAS" crlf)
 )
 
@@ -307,13 +326,14 @@
     (dni ?dni)
     (antecedente TRASTORNOSDEANSIEDAD)
   )
-  (paciente_presuncion
+  ?PRES <- (paciente_presuncion
     (dni ?dni)
     (diagnostico $?diagnosticos)
   )
   (test (not (subsetp (create$ OTRASPATOLOGIAS) $?diagnosticos)))
   =>
-  (insert$ $?diagnosticos 1 OTRASPATOLOGIAS)
-  (delete-member$ $?diagnosticos NOSE)
+  (modify ?PRES
+    (diagnostico (insert$ (delete-member$ $?diagnosticos NOSE) 1 OTRASPATOLOGIAS))
+  )
   (printout t "Insertado presuncion TrastornosAnsiedad-OTRASPATOLOGIAS" crlf)
 )

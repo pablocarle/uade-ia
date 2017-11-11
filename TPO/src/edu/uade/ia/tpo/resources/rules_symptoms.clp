@@ -304,7 +304,7 @@
   )
   =>
   (modify ?PRES
-    (diagnotico (insert$ (delete-member$ $?diagnosticos NOSE) 1 DESGANO))
+    (diagnostico (insert$ (delete-member$ $?diagnosticos NOSE) 1 DESGANO))
   )
 )
 
