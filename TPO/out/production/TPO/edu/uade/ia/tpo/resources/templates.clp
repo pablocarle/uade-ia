@@ -118,6 +118,7 @@
       TRASTORNOSALIMENTICIOS
       TRASTORNOSDEANSIEDAD
     )
+		(default NINGUNO)
   )
 )
 
