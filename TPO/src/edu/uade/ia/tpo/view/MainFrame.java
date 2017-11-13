@@ -25,7 +25,7 @@ import java.util.stream.Collectors;
  * */
 public class MainFrame {
 
-    private static final Rectangle DEFAULT_BOUNDS = new Rectangle(400, 100, 1024, 500);
+    private static final Rectangle DEFAULT_BOUNDS = new Rectangle(400, 100, 1024, 550);
 
     private ShrinkClipsService clipsService;
 

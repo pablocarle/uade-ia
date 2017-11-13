@@ -29,7 +29,7 @@ public final class ShrinkClipsService {
         clips.loadFromResource("/edu/uade/ia/tpo/resources/templates.clp"); // Load templates
         clips.loadFromResource("/edu/uade/ia/tpo/resources/rules_antecedents.clp"); // Load rules
         clips.loadFromResource("/edu/uade/ia/tpo/resources/rules_symptoms.clp"); // Load rules
-        clips.loadFromResource("/edu/uade/ia/tpo/resources/default_facts.clp");// Load test facts
+        //clips.loadFromResource("/edu/uade/ia/tpo/resources/default_facts.clp");// Load test facts
         clips.reset();
     }
 
